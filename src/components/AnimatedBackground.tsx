@@ -56,6 +56,12 @@ const AnimatedBackground = () => {
           boxShadow: "0 0 30px 12px hsl(45 70% 70% / 0.08)",
         }}
       />
+      {/* Moon blue shine */}
+      <div className="absolute -top-10 -right-10 w-[300px] h-[300px] rounded-full pointer-events-none animate-moon-glow"
+        style={{
+          background: "radial-gradient(circle, hsl(200 80% 60% / 0.08) 0%, hsl(200 80% 50% / 0.03) 40%, transparent 70%)",
+        }}
+      />
 
       {/* ===== SUBTLE WARM AMBIENT ===== */}
       <div
