@@ -88,7 +88,7 @@ const JazzPlayer = () => {
           </h3>
           <div className="flex items-center gap-1.5 mt-1">
             <Radio className="w-3 h-3 text-primary" />
-            <span className="text-xs font-mono text-muted-foreground">
+            <span className={`text-xs font-mono ${isPlaying ? "text-primary animate-amber-glow" : "text-muted-foreground"}`}>
               {isPlaying ? "LIVE" : loading ? "TUNING..." : "OFFLINE"}
             </span>
             {isPlaying && (
