@@ -1,148 +1,195 @@
 import jazzBarBg from "@/assets/jazz-bar-bg.jpg";
 
-const musicNotes = ["♪", "♫", "♬", "♩", "♭", "♯"];
+const musicNotes = ["♪", "♫", "♬", "♩", "♭", "♯", "𝄞", "♪", "♫"];
 
 const AnimatedBackground = () => {
   return (
     <div className="fixed inset-0 z-0 overflow-hidden">
-      {/* Base image with flicker */}
+      {/* Base image with gentle flicker */}
       <div
-        className="absolute inset-0 animate-flicker bg-cover bg-center"
+        className="absolute inset-0 animate-flicker-subtle bg-cover bg-center"
         style={{ backgroundImage: `url(${jazzBarBg})` }}
       />
 
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-background/60" />
+      <div className="absolute inset-0 bg-background/65" />
 
-      {/* Moon glow - top right */}
-      <div className="absolute top-6 right-10 w-16 h-16 rounded-full animate-moon-glow"
+      {/* ===== CEILING SPOTLIGHT BEAMS ===== */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 400 800" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="beam1" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="hsl(35 100% 60%)" stopOpacity="0.12" />
+            <stop offset="100%" stopColor="hsl(35 100% 60%)" stopOpacity="0" />
+          </linearGradient>
+          <linearGradient id="beam2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="hsl(200 80% 50%)" stopOpacity="0.08" />
+            <stop offset="100%" stopColor="hsl(200 80% 50%)" stopOpacity="0" />
+          </linearGradient>
+          <linearGradient id="beam3" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="hsl(35 80% 55%)" stopOpacity="0.06" />
+            <stop offset="100%" stopColor="hsl(35 80% 55%)" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        {/* Sweeping amber spotlight */}
+        <polygon points="120,0 80,500 160,500" fill="url(#beam1)" className="animate-spotlight-sweep" style={{ transformOrigin: "120px 0px" }} />
+        {/* Sweeping blue spotlight */}
+        <polygon points="280,0 240,450 320,450" fill="url(#beam2)" className="animate-spotlight-sweep-alt" style={{ transformOrigin: "280px 0px" }} />
+        {/* Center subtle beam */}
+        <polygon points="200,0 170,400 230,400" fill="url(#beam3)" className="animate-spotlight-breathe" style={{ transformOrigin: "200px 0px" }} />
+      </svg>
+
+      {/* ===== CEILING LIGHT FIXTURES (SVG) ===== */}
+      <svg className="absolute top-0 left-0 w-full h-12 pointer-events-none" viewBox="0 0 400 30" preserveAspectRatio="none">
+        {[80, 200, 320].map((x, i) => (
+          <g key={`fixture-${i}`}>
+            <line x1={x} y1="0" x2={x} y2="12" stroke="hsl(35 30% 25%)" strokeWidth="1" />
+            <circle cx={x} cy="14" r="3" fill="none" stroke="hsl(35 40% 30%)" strokeWidth="0.5" />
+            <circle cx={x} cy="14" r="1.5" className={`animate-fixture-glow-${i}`} fill="hsl(35 100% 60%)" opacity="0.6" />
+          </g>
+        ))}
+      </svg>
+
+      {/* ===== MOON ===== */}
+      <div className="absolute top-5 right-8 w-12 h-12 rounded-full animate-moon-glow pointer-events-none"
         style={{
-          background: "radial-gradient(circle, hsl(45 80% 85% / 0.9) 0%, hsl(45 60% 70% / 0.4) 40%, transparent 70%)",
-          boxShadow: "0 0 40px 20px hsl(45 80% 70% / 0.15), 0 0 80px 40px hsl(45 60% 60% / 0.08)",
+          background: "radial-gradient(circle, hsl(45 70% 88% / 0.7) 0%, hsl(45 50% 70% / 0.2) 50%, transparent 70%)",
+          boxShadow: "0 0 30px 12px hsl(45 70% 70% / 0.08)",
         }}
       />
 
-      {/* Warm amber light cone - top left */}
+      {/* ===== SUBTLE WARM AMBIENT ===== */}
       <div
-        className="absolute -top-20 -left-20 w-[500px] h-[500px] rounded-full animate-breathe"
+        className="absolute -top-20 -left-20 w-[400px] h-[400px] rounded-full animate-breathe-slow"
         style={{
-          background: "radial-gradient(circle, hsl(35 100% 60% / 0.12) 0%, transparent 70%)",
+          background: "radial-gradient(circle, hsl(35 100% 60% / 0.06) 0%, transparent 70%)",
         }}
       />
-
-      {/* Blue neon light cone - top right */}
       <div
-        className="absolute -top-10 -right-20 w-[400px] h-[400px] rounded-full animate-breathe"
+        className="absolute -top-10 -right-20 w-[350px] h-[350px] rounded-full animate-breathe-slow"
         style={{
-          background: "radial-gradient(circle, hsl(200 80% 50% / 0.1) 0%, transparent 70%)",
-          animationDelay: "3s",
+          background: "radial-gradient(circle, hsl(200 80% 50% / 0.04) 0%, transparent 70%)",
+          animationDelay: "4s",
         }}
       />
 
-      {/* Neon sign - "JAZZ" */}
-      <div className="absolute top-16 left-6 animate-neon-sign pointer-events-none select-none">
-        <span className="font-display text-2xl font-black italic text-neon-blue" style={{
-          textShadow: "0 0 7px hsl(200 80% 50% / 0.8), 0 0 20px hsl(200 80% 50% / 0.5), 0 0 40px hsl(200 80% 50% / 0.3)",
-        }}>JAZZ</span>
-      </div>
+      {/* ===== NEON SIGNS (SVG) ===== */}
+      <svg className="absolute top-14 left-4 w-20 h-10 pointer-events-none select-none animate-neon-sign" viewBox="0 0 80 30">
+        <text x="5" y="22" fontFamily="Playfair Display, serif" fontWeight="900" fontStyle="italic" fontSize="18"
+          fill="none" stroke="hsl(200 80% 50%)" strokeWidth="0.8"
+          filter="url(#neonGlow)">JAZZ</text>
+        <defs>
+          <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="2" result="blur" />
+            <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+          </filter>
+        </defs>
+      </svg>
 
-      {/* Neon sign - "LIVE" */}
-      <div className="absolute top-28 right-8 animate-neon-sign-alt pointer-events-none select-none">
-        <span className="font-display text-lg font-bold text-primary" style={{
-          textShadow: "0 0 7px hsl(35 100% 60% / 0.8), 0 0 20px hsl(35 100% 60% / 0.5), 0 0 40px hsl(35 100% 60% / 0.3)",
-        }}>♪ LIVE ♪</span>
-      </div>
+      <svg className="absolute top-24 right-4 w-14 h-8 pointer-events-none select-none animate-neon-sign-alt" viewBox="0 0 56 24">
+        <text x="4" y="17" fontFamily="Playfair Display, serif" fontWeight="700" fontSize="13"
+          fill="none" stroke="hsl(35 100% 60%)" strokeWidth="0.6"
+          filter="url(#neonGlowAmber)">LIVE</text>
+        <defs>
+          <filter id="neonGlowAmber" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="1.5" result="blur" />
+            <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+          </filter>
+        </defs>
+      </svg>
 
-      {/* Candle flickers - scattered */}
-      {[
-        { left: "12%", bottom: "18%", delay: "0s", size: "w-1 h-3" },
-        { left: "78%", bottom: "22%", delay: "0.7s", size: "w-1 h-2.5" },
-        { left: "45%", bottom: "15%", delay: "1.3s", size: "w-0.5 h-2" },
-        { left: "88%", bottom: "30%", delay: "2s", size: "w-1 h-3" },
-      ].map((c, i) => (
-        <div key={`candle-${i}`} className="absolute pointer-events-none" style={{ left: c.left, bottom: c.bottom }}>
-          <div className={`${c.size} bg-gradient-to-t from-primary/60 to-primary rounded-full animate-candle-flicker`}
-            style={{ animationDelay: c.delay, filter: "blur(1px)" }} />
-          <div className="w-3 h-3 -mt-1 rounded-full animate-candle-glow"
-            style={{
-              animationDelay: c.delay,
-              background: "radial-gradient(circle, hsl(35 100% 60% / 0.5) 0%, transparent 70%)",
-            }} />
-        </div>
-      ))}
+      {/* ===== CANDLES (SVG) ===== */}
+      <svg className="absolute bottom-0 left-0 w-full h-48 pointer-events-none" viewBox="0 0 400 120" preserveAspectRatio="xMidYMax meet">
+        {[
+          { x: 30, y: 85, h: 18, delay: 0 },
+          { x: 72, y: 90, h: 14, delay: 0.4 },
+          { x: 145, y: 82, h: 20, delay: 0.8 },
+          { x: 210, y: 92, h: 12, delay: 1.2 },
+          { x: 260, y: 78, h: 22, delay: 0.3 },
+          { x: 310, y: 88, h: 16, delay: 1.6 },
+          { x: 365, y: 84, h: 19, delay: 0.6 },
+          { x: 105, y: 95, h: 10, delay: 2.0 },
+          { x: 340, y: 93, h: 11, delay: 1.0 },
+        ].map((c, i) => (
+          <g key={`candle-${i}`}>
+            {/* Candle body */}
+            <rect x={c.x - 2} y={c.y} width="4" height={c.h} rx="1" fill="hsl(35 30% 25%)" opacity="0.5" />
+            {/* Wick */}
+            <line x1={c.x} y1={c.y} x2={c.x} y2={c.y - 3} stroke="hsl(35 20% 20%)" strokeWidth="0.5" />
+            {/* Flame outer */}
+            <ellipse cx={c.x} cy={c.y - 5} rx="2.5" ry="4" fill="hsl(35 100% 60%)" opacity="0.3"
+              className="animate-candle-flicker" style={{ animationDelay: `${c.delay}s`, transformOrigin: `${c.x}px ${c.y - 5}px` }} />
+            {/* Flame inner */}
+            <ellipse cx={c.x} cy={c.y - 5} rx="1.2" ry="2.5" fill="hsl(45 100% 80%)" opacity="0.6"
+              className="animate-candle-flicker" style={{ animationDelay: `${c.delay + 0.2}s`, transformOrigin: `${c.x}px ${c.y - 5}px` }} />
+            {/* Glow */}
+            <circle cx={c.x} cy={c.y - 4} r="8" fill="hsl(35 100% 60%)" opacity="0.04"
+              className="animate-candle-glow" style={{ animationDelay: `${c.delay}s` }} />
+          </g>
+        ))}
+      </svg>
 
-      {/* Floating music notes */}
+      {/* ===== FLOATING MUSIC NOTES ===== */}
       {musicNotes.map((note, i) => (
         <div
           key={`note-${i}`}
-          className="absolute text-primary/30 pointer-events-none select-none animate-float-note font-display"
+          className="absolute pointer-events-none select-none animate-float-note"
           style={{
-            left: `${10 + i * 15}%`,
+            left: `${5 + i * 10}%`,
             bottom: "-20px",
-            fontSize: `${18 + (i % 3) * 8}px`,
-            animationDelay: `${i * 1.8}s`,
-            animationDuration: `${7 + (i % 4) * 2}s`,
+            fontSize: `${14 + (i % 3) * 6}px`,
+            animationDelay: `${i * 1.6}s`,
+            animationDuration: `${8 + (i % 4) * 2}s`,
+            color: i % 2 === 0 ? "hsl(35 85% 55% / 0.2)" : "hsl(200 80% 50% / 0.15)",
           }}
         >
           {note}
         </div>
       ))}
 
-      {/* Extra floating notes layer */}
-      {["♪", "♫", "♬", "♩"].map((note, i) => (
-        <div
-          key={`note2-${i}`}
-          className="absolute text-neon-blue/20 pointer-events-none select-none animate-float-note-alt font-display"
-          style={{
-            left: `${25 + i * 18}%`,
-            bottom: "-30px",
-            fontSize: `${14 + (i % 2) * 10}px`,
-            animationDelay: `${2 + i * 2.5}s`,
-            animationDuration: `${9 + i * 1.5}s`,
-          }}
-        >
-          {note}
-        </div>
-      ))}
+      {/* ===== DUST / PARTICLES (SVG) ===== */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 400 800" preserveAspectRatio="none">
+        {Array.from({ length: 20 }).map((_, i) => (
+          <circle
+            key={`dust-${i}`}
+            cx={30 + (i * 37) % 370}
+            cy={50 + (i * 73) % 700}
+            r={0.5 + (i % 3) * 0.3}
+            fill="hsl(35 60% 70%)"
+            opacity={0.08 + (i % 4) * 0.03}
+            className="animate-dust-float"
+            style={{ animationDelay: `${(i * 0.8) % 10}s`, animationDuration: `${10 + (i % 5) * 3}s` }}
+          />
+        ))}
+      </svg>
 
-      {/* Smoke layers */}
+      {/* ===== SMOKE LAYERS ===== */}
       <div
-        className="absolute inset-0 animate-smoke opacity-10"
+        className="absolute inset-0 animate-smoke opacity-8"
         style={{
-          background: "linear-gradient(180deg, transparent 30%, hsl(220 10% 30% / 0.4) 60%, transparent 90%)",
+          background: "linear-gradient(180deg, transparent 30%, hsl(220 10% 30% / 0.3) 60%, transparent 90%)",
         }}
       />
       <div
-        className="absolute inset-0 animate-smoke-slow opacity-10"
+        className="absolute inset-0 animate-smoke-slow opacity-8"
         style={{
-          background: "linear-gradient(135deg, transparent 20%, hsl(35 20% 40% / 0.3) 50%, transparent 80%)",
+          background: "linear-gradient(135deg, transparent 20%, hsl(35 20% 40% / 0.2) 50%, transparent 80%)",
         }}
       />
 
-      {/* Strobe flash - more dramatic */}
-      <div className="absolute inset-0 bg-foreground animate-strobe pointer-events-none" />
-      <div className="absolute inset-0 bg-neon-blue animate-strobe-blue pointer-events-none" />
-
-      {/* Colored strobe spots */}
-      <div className="absolute top-0 left-1/4 w-40 h-full animate-strobe-spot pointer-events-none"
-        style={{ background: "linear-gradient(180deg, hsl(200 80% 50% / 0.08) 0%, transparent 40%)" }} />
-      <div className="absolute top-0 right-1/4 w-40 h-full animate-strobe-spot pointer-events-none"
-        style={{ background: "linear-gradient(180deg, hsl(35 100% 60% / 0.06) 0%, transparent 40%)", animationDelay: "3s" }} />
-
-      {/* Light sweep across stage */}
+      {/* ===== LIGHT SWEEP ===== */}
       <div
-        className="absolute inset-0 animate-light-sweep opacity-30 pointer-events-none"
+        className="absolute inset-0 animate-light-sweep opacity-20 pointer-events-none"
         style={{
-          background: "linear-gradient(90deg, transparent 40%, hsl(35 100% 60% / 0.06) 50%, transparent 60%)",
+          background: "linear-gradient(90deg, transparent 40%, hsl(35 100% 60% / 0.04) 50%, transparent 60%)",
           backgroundSize: "200% 100%",
         }}
       />
 
-      {/* Vignette */}
+      {/* ===== VIGNETTE ===== */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse at center, transparent 30%, hsl(220 20% 6% / 0.85) 100%)",
+          background: "radial-gradient(ellipse at center, transparent 25%, hsl(220 20% 6% / 0.9) 100%)",
         }}
       />
     </div>
