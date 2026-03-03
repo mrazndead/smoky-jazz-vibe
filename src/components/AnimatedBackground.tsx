@@ -87,12 +87,12 @@ const AnimatedBackground = () => {
 
       <svg className="absolute top-24 right-4 w-14 h-8 pointer-events-none select-none animate-neon-sign-alt" viewBox="0 0 56 24">
         <text x="4" y="17" fontFamily="Playfair Display, serif" fontWeight="700" fontSize="13"
-          fill="none" stroke="hsl(35 100% 60%)" strokeWidth="0.6"
+          fill="hsl(35 100% 60%)" stroke="hsl(35 100% 60%)" strokeWidth="0.3"
           filter="url(#neonGlowAmber)">LIVE</text>
         <defs>
           <filter id="neonGlowAmber" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="1.5" result="blur" />
-            <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feMerge><feMergeNode in="blur" /><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
           </filter>
         </defs>
       </svg>
