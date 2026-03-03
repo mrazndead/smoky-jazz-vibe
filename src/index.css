@@ -300,7 +300,7 @@
 
 /* Glassmorphism card */
 .glass-card {
-  background: hsl(220 18% 10% / 0.6);
+  background: hsl(220 18% 10% / 0.45);
   backdrop-filter: blur(16px);
   border: 1px solid hsl(35 30% 20% / 0.4);
 }
