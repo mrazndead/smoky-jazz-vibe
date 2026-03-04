@@ -1,6 +1,6 @@
 const MartiniGlass = () => {
   return (
-    <div className="w-20 h-24 opacity-60 hover:opacity-80 transition-opacity duration-700">
+    <div className="w-20 h-24 opacity-50 hover:opacity-70 transition-opacity duration-700">
       <svg viewBox="0 0 80 100" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="glassGrad" x1="0" y1="0" x2="0" y2="1">
@@ -34,19 +34,19 @@ const MartiniGlass = () => {
         {/* Base */}
         <ellipse cx="40" cy="83" rx="12" ry="2.5" fill="none" stroke="hsl(200 20% 75% / 0.45)" strokeWidth="1" />
 
-        {/* Toothpick - Adjusted to stay inside the bowl */}
+        {/* Toothpick */}
         <line
-          x1="30" y1="10" x2="50" y2="40"
-          stroke="hsl(35 40% 50% / 0.7)"
-          strokeWidth="1.5"
+          x1="30" y1="18" x2="50" y2="40"
+          stroke="hsl(35 40% 50% / 0.4)"
+          strokeWidth="0.7"
           className="animate-toothpick-sway"
-          style={{ transformOrigin: "40px 25px" }}
+          style={{ transformOrigin: "40px 29px" }}
         />
 
-        {/* Olive - Adjusted to match new toothpick position */}
-        <g className="animate-olive-bob" style={{ transformOrigin: "40px 25px" }}>
-          <ellipse cx="40" cy="25" rx="6" ry="5" fill="hsl(90(35% 40% / 0.9)" />
-          <ellipse cx="40" cy="25" rx="2" ry="1.5" fill="hsl(35 50% 30% / 0.8)" />
+        {/* Olive */}
+        <g className="animate-olive-bob" style={{ transformOrigin: "42px 32px" }}>
+          <ellipse cx="42" cy="32" rx="3.5" ry="3" fill="hsl(90 35% 40% / 0.75)" />
+          <ellipse cx="42" cy="32" rx="1.2" ry="1" fill="hsl(35 50% 30% / 0.7)" />
         </g>
 
         {/* Rim highlight */}
