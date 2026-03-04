@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Play, Pause, SkipForward, SkipBack, Volume2, VolumeX, Radio } from "lucide-react";
 import { jazzStations } from "@/data/jazzStations";
 import VinylDisc from "./VinylDisc";
+import MartiniGlass from "./MartiniGlass";
 
 const JazzPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -95,6 +96,9 @@ const JazzPlayer = () => {
               <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
             )}
           </div>
+        </div>
+        <div className="shrink-0 self-center">
+          <MartiniGlass />
         </div>
       </div>
 
