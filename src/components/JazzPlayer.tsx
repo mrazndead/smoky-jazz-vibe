@@ -10,6 +10,7 @@ const JazzPlayer = () => {
   const [volume, setVolume] = useState(0.7);
   const [isMuted, setIsMuted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isVisualizing, setIsVisualizing] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const station = jazzStations[stationIndex];
@@ -23,11 +24,13 @@ const JazzPlayer = () => {
     audio.addEventListener("playing", () => {
       setLoading(false);
       setIsPlaying(true);
+      setIsVisualizing(true);
     });
     audio.addEventListener("waiting", () => setLoading(true));
     audio.addEventListener("error", () => {
       setLoading(false);
       setIsPlaying(false);
+      setIsVisualizing(false);
     });
 
     return () => {
@@ -49,12 +52,14 @@ const JazzPlayer = () => {
     if (isPlaying) {
       audio.pause();
       setIsPlaying(false);
+      setIsVisualizing(false);
     } else {
       setLoading(true);
       audio.src = station.url;
       audio.play().catch(() => {
         setLoading(false);
         setIsPlaying(false);
+        setIsVisualizing(false);
       });
     }
   };
@@ -69,6 +74,7 @@ const JazzPlayer = () => {
       audio.play().catch(() => {
         setLoading(false);
         setIsPlaying(false);
+        setIsVisualizing(false);
       });
     }
   };
@@ -84,9 +90,14 @@ const JazzPlayer = () => {
               {station.genre}
             </span>
           </div>
-          <h3 className="font-display text-xl font-bold text-foreground truncate">
-            {station.name}
-          </h3>
+          
+          {/* Music visualizer replaces station name */}
+          <div className="h-8 w-full bg-primary/20 rounded-md overflow-hidden animate-pulse">
+            <div className="h-8 bg-primary animate-bounce" style={{ width: '30%', animationDelay: '0s' }}></div>
+            <div className="h-8 bg-primary animate-bounce" style={{ width: '50%', animationDelay: '0.2s' }}></div>
+            <div className="h-8 bg-primary animate-bounce" style={{ width: '70%', animationDelay: '0.4s' }}></div>
+          </div>
+
           <div className="flex items-center gap-1.5 mt-1">
             <Radio className="w-3 h-3 text-primary" />
             <span className={`text-xs font-mono ${isPlaying ? "text-primary animate-amber-glow" : "text-muted-foreground"}`}>
