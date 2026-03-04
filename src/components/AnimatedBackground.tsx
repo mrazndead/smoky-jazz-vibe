@@ -134,6 +134,35 @@ const AnimatedBackground = () => {
         ))}
       </svg>
 
+      {/* ===== RIGHT SIDE TABLE CANDLES ===== */}
+      <svg className="absolute bottom-20 right-0 w-32 h-40 pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="xMaxYMax meet">
+        {/* Table surface hint */}
+        <ellipse cx="50" cy="85" rx="45" ry="6" fill="hsl(25 20% 12%)" opacity="0.4" />
+        {[
+          { x: 30, y: 55, h: 22, delay: 0.2 },
+          { x: 55, y: 60, h: 16, delay: 0.9 },
+          { x: 75, y: 52, h: 24, delay: 1.5 },
+        ].map((c, i) => (
+          <g key={`right-candle-${i}`}>
+            {/* Candle holder */}
+            <rect x={c.x - 4} y={c.y + c.h - 2} width="8" height="3" rx="1" fill="hsl(35 20% 18%)" opacity="0.6" />
+            {/* Candle body */}
+            <rect x={c.x - 2.5} y={c.y} width="5" height={c.h} rx="1.5" fill="hsl(40 25% 30%)" opacity="0.5" />
+            {/* Wick */}
+            <line x1={c.x} y1={c.y} x2={c.x} y2={c.y - 3} stroke="hsl(35 20% 20%)" strokeWidth="0.6" />
+            {/* Flame outer */}
+            <ellipse cx={c.x} cy={c.y - 6} rx="3" ry="5" fill="hsl(35 100% 60%)" opacity="0.35"
+              className="animate-candle-flicker" style={{ animationDelay: `${c.delay}s`, transformOrigin: `${c.x}px ${c.y - 6}px` }} />
+            {/* Flame inner */}
+            <ellipse cx={c.x} cy={c.y - 6} rx="1.5" ry="3" fill="hsl(45 100% 80%)" opacity="0.65"
+              className="animate-candle-flicker" style={{ animationDelay: `${c.delay + 0.3}s`, transformOrigin: `${c.x}px ${c.y - 6}px` }} />
+            {/* Glow */}
+            <circle cx={c.x} cy={c.y - 5} r="12" fill="hsl(35 100% 60%)" opacity="0.05"
+              className="animate-candle-glow" style={{ animationDelay: `${c.delay}s` }} />
+          </g>
+        ))}
+      </svg>
+
       {/* ===== FLOATING MUSIC NOTES ===== */}
       {musicNotes.map((note, i) => (
         <div
