@@ -1,6 +1,6 @@
 const MartiniGlass = () => {
   return (
-    <div className="w-20 h-24 opacity-30 hover:opacity-50 transition-opacity duration-700">
+    <div className="w-10 h-12 opacity-25 hover:opacity-40 transition-opacity duration-700">
       <svg viewBox="0 0 80 100" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="glassGrad" x1="0" y1="0" x2="0" y2="1">
