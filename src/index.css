@@ -72,8 +72,8 @@
 }
 
 @keyframes flicker-subtle {
-  0%, 100% { opacity: 0.97; }
-  50% { opacity: 0.93; }
+  0%, 100% { opacity: 0.96; }
+  50% { opacity: 0.95; }
 }
 
 @keyframes neon-pulse {
@@ -102,10 +102,8 @@
 }
 
 @keyframes strobe-subtle {
-  0%, 92%, 100% { opacity: 0; }
-  94% { opacity: 0.015; }
-  96% { opacity: 0; }
-  98% { opacity: 0.02; }
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.005; }
 }
 
 @keyframes spotlight-sweep {
@@ -183,9 +181,7 @@
 
 @keyframes neon-sign {
   0%, 100% { opacity: 1; }
-  40% { opacity: 0.85; }
-  50% { opacity: 1; }
-  80% { opacity: 0.9; }
+  50% { opacity: 0.95; }
 }
 
 @keyframes strobe-blue {
@@ -225,7 +221,7 @@
 .animate-smoke { animation: smoke-drift 12s ease-in-out infinite; will-change: transform, opacity; }
 .animate-smoke-slow { animation: smoke-drift 18s ease-in-out infinite reverse; will-change: transform, opacity; }
 .animate-flicker { animation: flicker 4s ease-in-out infinite; }
-.animate-flicker-subtle { animation: flicker-subtle 10s ease-in-out infinite; will-change: opacity; }
+.animate-flicker-subtle { animation: flicker-subtle 16s ease-in-out infinite; will-change: opacity; }
 .animate-neon-pulse { animation: neon-pulse 3s ease-in-out infinite; }
 .animate-amber-glow { animation: amber-glow 4s ease-in-out infinite; }
 .animate-light-sweep { animation: light-sweep 8s linear infinite; }
