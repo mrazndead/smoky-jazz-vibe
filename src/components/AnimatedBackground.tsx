@@ -1,14 +1,66 @@
+import { useState, useEffect } from "react";
 import jazzBarBg from "@/assets/jazz-bar-bg.jpg";
+import jazzBarBg2 from "@/assets/jazz-bar-bg-2.jpg";
+import jazzBarBg3 from "@/assets/jazz-bar-bg-3.jpg";
 
 const musicNotes = ["♪", "♫", "♬", "♩", "♭", "♯", "𝄞", "♪", "♫"];
 
 const AnimatedBackground = () => {
+  const [currentImage, setCurrentImage] = useState(0);
+  const [isSwiping, setIsSwiping] = useState(false);
+  const [swipeStartX, setSwipeStartX] = useState(0);
+  const [swipeEndX, setSwipeEndX] = useState(0);
+
+  const images = [
+    jazzBarBg,
+    jazzBarBg2,
+    jazzBarBg3,
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const nextIndex = (currentImage + 1) % images.length;
+      setCurrentImage(nextIndex);
+    }, 1500000); // 25 minutes
+
+    return () => clearInterval(interval);
+  }, [currentImage]);
+
+  const handleTouchStart = (e: TouchEvent) => {
+    const touch = e.touches[0];
+    setSwipeStartX(touch.clientX);
+    setIsSwiping(true);
+  };
+
+  const handleTouchMove = (e: TouchEvent) => {
+    if (!isSwiping) return;
+    const touch = e.touches[0];
+    setSwipeEndX(touch.clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!isSwiping) return;
+    const swipeDistance = swipeEndX - swipeStartX;
+    const shouldSwipeLeft = swipeDistance > 100;
+    const shouldSwipeRight = swipeDistance < -100;
+
+    if (shouldSwipeLeft) {
+      const nextIndex = (currentImage - 1 + images.length) % images.length;
+      setCurrentImage(nextIndex);
+    } else if (shouldSwipeRight) {
+      const nextIndex = (currentImage + 1) % images.length;
+      setCurrentImage(nextIndex);
+    }
+
+    setIsSwiping(false);
+  };
+
   return (
     <div className="fixed inset-0 z-0 overflow-hidden">
       {/* Base image with gentle flicker */}
       <div
         className="absolute inset-0 animate-flicker-subtle bg-cover bg-center"
-        style={{ backgroundImage: `url(${jazzBarBg})` }}
+        style={{ backgroundImage: `url(${images[currentImage]})` }}
       />
 
       {/* Dark overlay */}
