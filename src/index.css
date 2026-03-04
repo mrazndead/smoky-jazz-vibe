@@ -72,12 +72,8 @@
 }
 
 @keyframes flicker-subtle {
-  0%, 100% { opacity: 0.95; }
-  10% { opacity: 0.9; }
-  30% { opacity: 0.95; }
-  50% { opacity: 0.88; }
-  70% { opacity: 0.93; }
-  90% { opacity: 0.96; }
+  0%, 100% { opacity: 0.97; }
+  50% { opacity: 0.93; }
 }
 
 @keyframes neon-pulse {
@@ -170,11 +166,9 @@
 
 @keyframes candle-flicker {
   0%, 100% { opacity: 0.8; transform: scaleY(1) scaleX(1); }
-  10% { opacity: 0.5; transform: scaleY(0.8) scaleX(1.2); }
-  20% { opacity: 0.9; transform: scaleY(1.1) scaleX(0.9); }
-  40% { opacity: 0.6; transform: scaleY(0.9) scaleX(1.1); }
-  60% { opacity: 1; transform: scaleY(1.05) scaleX(0.95); }
-  80% { opacity: 0.7; transform: scaleY(0.95) scaleX(1.05); }
+  25% { opacity: 0.6; transform: scaleY(0.9) scaleX(1.1); }
+  50% { opacity: 1; transform: scaleY(1.05) scaleX(0.95); }
+  75% { opacity: 0.7; transform: scaleY(0.95) scaleX(1.05); }
 }
 
 @keyframes candle-glow {
@@ -189,13 +183,9 @@
 
 @keyframes neon-sign {
   0%, 100% { opacity: 1; }
-  3% { opacity: 0.3; }
-  6% { opacity: 1; }
-  8% { opacity: 0.4; }
-  10% { opacity: 1; }
-  50% { opacity: 0.95; }
-  52% { opacity: 0.6; }
-  54% { opacity: 1; }
+  40% { opacity: 0.85; }
+  50% { opacity: 1; }
+  80% { opacity: 0.9; }
 }
 
 @keyframes strobe-blue {
@@ -232,10 +222,10 @@
   100% { transform: rotate(360deg); }
 }
 
-.animate-smoke { animation: smoke-drift 12s ease-in-out infinite; }
-.animate-smoke-slow { animation: smoke-drift 18s ease-in-out infinite reverse; }
+.animate-smoke { animation: smoke-drift 12s ease-in-out infinite; will-change: transform, opacity; }
+.animate-smoke-slow { animation: smoke-drift 18s ease-in-out infinite reverse; will-change: transform, opacity; }
 .animate-flicker { animation: flicker 4s ease-in-out infinite; }
-.animate-flicker-subtle { animation: flicker-subtle 6s ease-in-out infinite; }
+.animate-flicker-subtle { animation: flicker-subtle 10s ease-in-out infinite; will-change: opacity; }
 .animate-neon-pulse { animation: neon-pulse 3s ease-in-out infinite; }
 .animate-amber-glow { animation: amber-glow 4s ease-in-out infinite; }
 .animate-light-sweep { animation: light-sweep 8s linear infinite; }
@@ -250,7 +240,7 @@
 .animate-breathe-slow { animation: breathe 10s ease-in-out infinite; }
 .animate-float-note { animation: float-note linear infinite; }
 .animate-float-note-alt { animation: float-note-alt linear infinite; }
-.animate-candle-flicker { animation: candle-flicker 1.5s ease-in-out infinite; }
+.animate-candle-flicker { animation: candle-flicker 2.5s ease-in-out infinite; will-change: transform, opacity; }
 .animate-candle-glow { animation: candle-glow 2s ease-in-out infinite; }
 .animate-moon-glow { animation: moon-glow 8s ease-in-out infinite; }
 .animate-neon-sign { animation: neon-sign 5s ease-in-out infinite; }
