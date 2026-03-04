@@ -1,6 +1,7 @@
 import AnimatedBackground from "@/components/AnimatedBackground";
 import JazzPlayer from "@/components/JazzPlayer";
 import JazzQuote from "@/components/JazzQuote";
+import MartiniGlass from "@/components/MartiniGlass";
 import { Music } from "lucide-react";
 
 const Index = () => {
@@ -30,8 +31,11 @@ const Index = () => {
         </div>
 
         {/* Player */}
-        <div className="flex-1 flex items-start justify-center">
+        <div className="flex-1 flex items-start justify-center gap-6">
           <JazzPlayer />
+          <div className="hidden sm:flex items-start pt-16">
+            <MartiniGlass />
+          </div>
         </div>
 
         {/* Footer */}
