@@ -49,6 +49,18 @@ const AnimatedBackground = () => {
         ))}
       </svg>
 
+      {/* ===== CEILING STROBE LIGHTS ===== */}
+      <svg className="absolute top-0 left-0 w-full h-8 pointer-events-none" viewBox="0 0 400 20" preserveAspectRatio="none">
+        {/* Strobe light 1 - amber */}
+        <rect x="60" y="0" width="8" height="8" fill="hsl(35 100% 60%)" className="animate-strobe" style={{ animationDelay: "0s" }} />
+        {/* Strobe light 2 - blue */}
+        <rect x="160" y="0" width="8" height="8" fill="hsl(200 80% 50%)" className="animate-strobe" style={{ animationDelay: "0.3s" }} />
+        {/* Strobe light 3 - amber */}
+        <rect x="260" y="0" width="8" height="8" fill="hsl(35 100% 60%)" className="animate-strobe" style={{ animationDelay: "0.6s" }} />
+        {/* Strobe light 4 - blue */}
+        <rect x="340" y="0" width="8" height="8" fill="hsl(200 80% 50%)" className="animate-strobe" style={{ animationDelay: "0.9s" }} />
+      </svg>
+
       {/* ===== MOON ===== */}
       <div className="absolute top-5 right-8 w-12 h-12 rounded-full animate-moon-glow pointer-events-none"
         style={{
