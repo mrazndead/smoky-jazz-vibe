@@ -6,16 +6,6 @@ export interface JazzStation {
 
 export const jazzStations: JazzStation[] = [
   {
-    name: "Jazz24",
-    url: "https://live.amperwave.net/direct/ppm-jazz24aac-ibc1",
-    genre: "Classic Jazz",
-  },
-  {
-    name: "WBGO Jazz88",
-    url: "https://wbgo.streamguys.net/wbgo128",
-    genre: "Public Jazz",
-  },
-  {
     name: "WWOZ NOLA",
     url: "https://wwoz-sc.streamguys1.com/wwoz-hi.mp3",
     genre: "New Orleans",
@@ -26,19 +16,9 @@ export const jazzStations: JazzStation[] = [
     genre: "Smooth Jazz",
   },
   {
-    name: "Jazz Groove",
-    url: "https://east-mp3-128.streamguys1.com/100jazz128mp3",
-    genre: "Jazz Groove",
-  },
-  {
     name: "Radio Swiss Jazz",
     url: "https://stream.srg-ssr.ch/m/rsj/aacp_48",
     genre: "Swiss Jazz",
-  },
-  {
-    name: "KCSM Jazz",
-    url: "https://ice7.securenetsystems.net/KCSM",
-    genre: "Bay Area Jazz",
   },
   {
     name: "WICN Jazz",
