@@ -34,19 +34,19 @@ const MartiniGlass = () => {
         {/* Base */}
         <ellipse cx="40" cy="83" rx="12" ry="2.5" fill="none" stroke="hsl(200 20% 75% / 0.45)" strokeWidth="1" />
 
-        {/* Toothpick - Made thicker and longer */}
+        {/* Toothpick - Adjusted to stay inside the bowl */}
         <line
-          x1="28" y1="15" x2="52" y2="45"
+          x1="30" y1="10" x2="50" y2="40"
           stroke="hsl(35 40% 50% / 0.7)"
           strokeWidth="1.5"
           className="animate-toothpick-sway"
-          style={{ transformOrigin: "40px 30px" }}
+          style={{ transformOrigin: "40px 25px" }}
         />
 
-        {/* Olive - Made significantly larger */}
-        <g className="animate-olive-bob" style={{ transformOrigin: "42px 32px" }}>
-          <ellipse cx="42" cy="32" rx="6" ry="5" fill="hsl(90 35% 40% / 0.9)" />
-          <ellipse cx="42" cy="32" rx="2" ry="1.5" fill="hsl(35 50% 30% / 0.8)" />
+        {/* Olive - Adjusted to match new toothpick position */}
+        <g className="animate-olive-bob" style={{ transformOrigin: "40px 25px" }}>
+          <ellipse cx="40" cy="25" rx="6" ry="5" fill="hsl(90(35% 40% / 0.9)" />
+          <ellipse cx="40" cy="25" rx="2" ry="1.5" fill="hsl(35 50% 30% / 0.8)" />
         </g>
 
         {/* Rim highlight */}
