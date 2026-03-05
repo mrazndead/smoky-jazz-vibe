@@ -28,6 +28,12 @@ const AnimatedBackground = ({ currentImageIndex }: AnimatedBackgroundProps) => {
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-background/75" />
 
+      {/* ===== NEON SIGNS (Top) ===== */}
+      {/* Blue Neon Jazz Sign */}
+      <div className="absolute top-4 left-4 w-32 h-8 bg-primary/50 rounded-full animate-neon-sign" />
+      {/* Live Neon Sign */}
+      <div className="absolute top-4 right-4 w-32 h-8 bg-amber/50 rounded-full animate-neon-pulse" />
+
       {/* ===== BOKEH / LIGHT ORBS (Bottom) ===== */}
       <div className="absolute bottom-0 left-0 w-full h-1/3 overflow-hidden">
         {Array.from({ length: 6 }).map((_, i) => (
