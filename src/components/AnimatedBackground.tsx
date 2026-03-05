@@ -90,8 +90,10 @@ const AnimatedBackground = () => {
         <polygon points="120,0 80,500 160,500" fill="url(#beam1)" className="animate-spotlight-sweep" style={{ transformOrigin: "120px 0px" }} />
         {/* Sweeping blue spotlight */}
         <polygon points="280,0 240,450 320,450" fill="url(#beam2)" className="animate-spotlight-sweep-alt" style={{ transformOrigin: "280px 0px" }} />
-        {/* Third sweeping spotlight (blue) */}
+        {/* Third sweeping spotlight (blue) - Left side */}
         <polygon points="40,0 10,420 70,420" fill="url(#beam4)" className="animate-spotlight-sweep" style={{ transformOrigin: "40px 0px", animationDelay: "1s" }} />
+        {/* Fourth sweeping spotlight (amber) - Right side */}
+        <polygon points="360,0 320,480 400,480" fill="url(#beam1)" className="animate-spotlight-sweep-alt" style={{ transformOrigin: "360px 0px", animationDelay: "0.5s" }} />
         {/* Center subtle beam */}
         <polygon points="200,0 170,400 230,400" fill="url(#beam3)" className="animate-spotlight-breathe" style={{ transformOrigin: "200px 0px" }} />
       </svg>
