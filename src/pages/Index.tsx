@@ -1,12 +1,11 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import JazzPlayer from "@/components/JazzPlayer";
 import JazzQuote from "@/components/JazzQuote";
-import { Music } from "lucide-react";
+import { Music, ChevronLeft, ChevronRight } from "lucide-react";
 
 const Index = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const touchStartX = useRef<number | null>(null);
   const totalImages = 4;
 
   // Cycle background every 25 minutes
@@ -18,38 +17,34 @@ const Index = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Manual swipe handlers
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % totalImages);
   };
 
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX.current === null) return;
-    
-    const touchEndX = e.changedTouches[0].clientX;
-    const diff = touchStartX.current - touchEndX;
-    const threshold = 50; // minimum distance for a swipe
-
-    if (Math.abs(diff) > threshold) {
-      if (diff > 0) {
-        // Swipe left -> Next image
-        setCurrentImageIndex((prev) => (prev + 1) % totalImages);
-      } else {
-        // Swipe right -> Previous image
-        setCurrentImageIndex((prev) => (prev - 1 + totalImages) % totalImages);
-      }
-    }
-    
-    touchStartX.current = null;
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + totalImages) % totalImages);
   };
 
   return (
-    <div 
-      className="relative min-h-screen flex flex-col overflow-hidden touch-pan-y"
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-    >
+    <div className="relative min-h-screen flex flex-col overflow-hidden">
       <AnimatedBackground currentImageIndex={currentImageIndex} />
+
+      {/* Navigation Arrows */}
+      <button
+        onClick={prevImage}
+        className="fixed left-2 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-background/20 backdrop-blur-sm border border-primary/20 text-primary/40 hover:text-primary hover:border-primary/60 transition-all active:scale-95"
+        aria-label="Previous background"
+      >
+        <ChevronLeft className="w-6 h-6" />
+      </button>
+      
+      <button
+        onClick={nextImage}
+        className="fixed right-2 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-background/20 backdrop-blur-sm border border-primary/20 text-primary/40 hover:text-primary hover:border-primary/60 transition-all active:scale-95"
+        aria-label="Next background"
+      >
+        <ChevronRight className="w-6 h-6" />
+      </button>
 
       {/* Content */}
       <div className="relative z-10 flex flex-col min-h-screen px-4 py-8">
@@ -83,10 +78,11 @@ const Index = () => {
             {/* Background Indicators */}
             <div className="flex gap-2">
               {Array.from({ length: totalImages }).map((_, i) => (
-                <div 
+                <button
                   key={i}
+                  onClick={() => setCurrentImageIndex(i)}
                   className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${
-                    i === currentImageIndex ? "bg-primary w-4" : "bg-primary/20"
+                    i === currentImageIndex ? "bg-primary w-4" : "bg-primary/20 hover:bg-primary/40"
                   }`}
                 />
               ))}
