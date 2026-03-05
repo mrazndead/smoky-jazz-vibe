@@ -2,17 +2,18 @@ import { useState, useEffect } from "react";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import JazzPlayer from "@/components/JazzPlayer";
 import JazzQuote from "@/components/JazzQuote";
+import Candle from "@/components/Candle";
 import { Music } from "lucide-react";
 
 const Index = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const totalImages = 4;
 
-  // Cycle background every 25 minutes
+  // Cycle background every 15 minutes
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % totalImages);
-    }, 25 * 60 * 1000);
+    }, 15 * 60 * 1000);
 
     return () => clearInterval(interval);
   }, []);
@@ -49,19 +50,25 @@ const Index = () => {
 
         {/* Footer */}
         <footer className="text-center mt-8 pb-4">
-          <div className="flex flex-col items-center gap-4">
-            {/* Background Indicators */}
-            <div className="flex gap-2">
-              {Array.from({ length: totalImages }).map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrentImageIndex(i)}
-                  className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${
-                    i === currentImageIndex ? "bg-primary w-4" : "bg-primary/20 hover:bg-primary/40"
-                  }`}
-                  aria-label={`Switch to background ${i + 1}`}
-                />
-              ))}
+          <div className="flex flex-col items-center gap-6">
+            {/* Candle and Indicators */}
+            <div className="flex items-end gap-8">
+              <Candle />
+              <div className="flex gap-2 mb-2">
+                {Array.from({ length: totalImages }).map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setCurrentImageIndex(i)}
+                    className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${
+                      i === currentImageIndex ? "bg-primary w-4" : "bg-primary/20 hover:bg-primary/40"
+                    }`}
+                    aria-label={`Switch to background ${i + 1}`}
+                  />
+                ))}
+              </div>
+              <div className="scale-x-[-1]">
+                <Candle />
+              </div>
             </div>
             
             <div className="flex items-center justify-center gap-2 text-muted-foreground">
