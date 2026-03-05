@@ -179,7 +179,8 @@ const AnimatedBackground = () => {
         ))}
       </svg>
 
-      {/* ===== FLOATING MUSIC NOTES ===== */}
+      {/* ===== ENHANCED FLOATING MUSIC NOTES ===== */}
+      {/* First set of notes - larger and more prominent */}
       {musicNotes.map((note, i) => (
         <div
           key={`note-${i}`}
@@ -187,10 +188,12 @@ const AnimatedBackground = () => {
           style={{
             left: `${5 + i * 10}%`,
             bottom: "-20px",
-            fontSize: `${14 + (i % 3) * 6}px`,
+            fontSize: `${24 + (i % 3) * 8}px`, // Increased size
             animationDelay: `${i * 1.2}s`,
             animationDuration: `${8 + (i % 4) * 2}s`,
-            color: i % 2 === 0 ? "hsl(35 85% 55% / 0.25)" : "hsl(200 80% 50% / 0.2)",
+            color: i % 2 === 0 ? "hsl(35 85% 55% / 0.4)" : "hsl(200 80% 50% / 0.35)", // Increased opacity
+            fontWeight: 'bold', // Added boldness
+            textShadow: i % 2 === 0 ? "0 0 8px hsl(35 85% 55% / 0.3)" : "0 0 8px hsl(200 80% 50% / 0.3)", // Added glow
           }}
         >
           {note}
@@ -204,10 +207,31 @@ const AnimatedBackground = () => {
           style={{
             left: `${10 + i * 10}%`,
             bottom: "-20px",
-            fontSize: `${12 + (i % 2) * 4}px`,
+            fontSize: `${20 + (i % 2) * 6}px`, // Increased size
             animationDelay: `${i * 1.5 + 4}s`,
             animationDuration: `${10 + (i % 3) * 3}s`,
-            color: i % 2 === 0 ? "hsl(200 80% 50% / 0.15)" : "hsl(35 85% 55% / 0.2)",
+            color: i % 2 === 0 ? "hsl(200 80% 50% / 0.3)" : "hsl(35 85% 55% / 0.35)", // Increased opacity
+            fontWeight: 'bold', // Added boldness
+            textShadow: i % 2 === 0 ? "0 0 6px hsl(200 80% 50% / 0.25)" : "0 0 6px hsl(35 85% 55% / 0.25)", // Added glow
+          }}
+        >
+          {note}
+        </div>
+      ))}
+      {/* Third set of notes - even more prominent */}
+      {musicNotes.map((note, i) => (
+        <div
+          key={`note-extra-prominent-${i}`}
+          className={`absolute pointer-events-none select-none ${i % 2 === 0 ? 'animate-float-note' : 'animate-float-note-alt'}`}
+          style={{
+            left: `${15 + i * 8}%`,
+            bottom: "-20px",
+            fontSize: `${28 + (i % 2) * 10}px`, // Even larger size
+            animationDelay: `${i * 2 + 2}s`,
+            animationDuration: `${12 + (i % 2) * 4}s`,
+            color: i % 2 === 0 ? "hsl(35 85% 55% / 0.5)" : "hsl(200 80% 50% / 0.45)", // Even higher opacity
+            fontWeight: '900', // Extra bold
+            textShadow: i % 2 === 0 ? "0 0 12px hsl(35 85% 55% / 0.4)" : "0 0 12px hsl(200 80% 50% / 0.4)", // Stronger glow
           }}
         >
           {note}
