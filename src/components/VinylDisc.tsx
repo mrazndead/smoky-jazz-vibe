@@ -35,15 +35,6 @@ const VinylDisc = ({ isPlaying }: VinylDiscProps) => {
           <div className={`w-2 h-2 rounded-full bg-primary-foreground/80 ${isPlaying ? "animate-pulse" : ""}`} />
         </div>
       </div>
-      {/* Sound wave indicators when playing */}
-      {isPlaying && (
-        <div className="absolute -right-3 top-1/2 -translate-y-1/2 flex flex-col gap-0.5">
-          {[0, 1, 2].map((i) => (
-            <div key={i} className="w-1 bg-primary/40 rounded-full animate-eq-bar"
-              style={{ animationDelay: `${i * 0.15}s`, height: "8px" }} />
-          ))}
-        </div>
-      )}
     </div>
   );
 };

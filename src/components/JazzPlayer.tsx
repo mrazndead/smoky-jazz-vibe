@@ -79,13 +79,7 @@ const JazzPlayer = () => {
       <div className="flex items-center gap-4 mb-5">
         <VinylDisc isPlaying={isPlaying && !loading} />
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-1">
-            <span className="text-[10px] font-mono tracking-wider uppercase px-2 py-0.5 rounded-full border border-primary/40 text-primary">
-              {station.genre}
-            </span>
-          </div>
-          
-          {/* Music Visualizer */}
+          {/* Status Indicator */}
           <div className="flex items-center gap-1.5 mb-1">
             <Radio className="w-3 h-3 text-primary" />
             <span className={`text-xs font-mono ${isPlaying ? "text-primary animate-amber-glow" : "text-muted-foreground"}`}>
