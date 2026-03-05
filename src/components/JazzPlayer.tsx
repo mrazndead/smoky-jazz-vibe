@@ -122,30 +122,24 @@ const JazzPlayer = () => {
         <div className="flex-1 min-w-0">
           {/* Status Indicator Area */}
           <div className="flex flex-col gap-1.5 mb-1">
-            {/* Visualizer Container */}
-            <div className="relative w-full h-32 mb-4">
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500" />
-              <div className="absolute inset-0 flex items-center justify-center text-center text-white text-2xl font-bold">
-                {isPlaying ? "LIVE" : loading ? "TUNING..." : "OFFLINE"}
+            {/* Visualizer Bars (Above) */}
+            {isPlaying && (
+              <div className="flex items-center gap-0.5 h-4">
+                <div className="w-1 h-2 bg-primary rounded-full animate-eq-bar" style={{ animationDelay: "0s" }} />
+                <div className="w-1 h-3 bg-primary rounded-full animate-eq-bar" style={{ animationDelay: "0.1s" }} />
+                <div className="w-1 h-1.5 bg-primary rounded-full animate-eq-bar" style={{ animationDelay: "0.2s" }} />
+                <div className="w-1 h-4 bg-primary rounded-full animate-eq-bar" style={{ animationDelay: "0.3s" }} />
+                <div className="w-1 h-2.5 bg-primary rounded-full animate-eq-bar" style={{ animationDelay: "0.4s" }} />
               </div>
+            )}
+            
+            {/* Status Text (Below) */}
+            <div className="flex items-center gap-1.5">
+              <Radio className="w-3 h-3 text-primary" />
+              <span className={`text-xs font-mono ${isPlaying ? "text-primary animate-amber-glow" : "text-muted-foreground"}`}>
+                {isPlaying ? "LIVE" : loading ? "TUNING..." : "OFFLINE"}
+              </span>
             </div>
-            {/* Visualizer Bars */}
-            <div className="absolute inset-0 flex items-center justify-center space-x-2">
-              {Array.from({ length: 12 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="flex-1 h-16 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 rounded-full animate-pulse duration-2s ease-in-out"
-                  style={{ animationDelay: `${i * 0.1}s` }}
-                />
-              ))}
-            </div>
-          </div>
-          {/* Status Text (Below) */}
-          <div className="flex items-center gap-1.5">
-            <Radio className="w-3 h-3 text-primary" />
-            <span className={`text-xs font-mono ${isPlaying ? "text-primary animate-amber-glow" : "text-muted-foreground"}`}>
-              {isPlaying ? "LIVE" : loading ? "TUNING..." : "OFFLINE"}
-            </span>
           </div>
         </div>
         <div className="shrink-0 self-center">

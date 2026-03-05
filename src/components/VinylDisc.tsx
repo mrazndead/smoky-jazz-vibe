@@ -1,20 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
-import { Play, Pause, SkipForward, SkipBack, Volume2, VolumeX, Radio } from 'lucide-react';
-import { jazzStations } from '@/data/jazzStations';
-import MartiniGlass from './MartiniGlass';
+interface VinylDiscProps {
+  isPlaying: boolean;
+}
 
-const VinylDisc = ({ isPlaying }: { isPlaying: boolean }) => {
-  const [rotation, setRotation] = useState(0);
-
-  useEffect(() => {
-    if (isPlaying) {
-      const interval = setInterval(() => {
-        setRotation(prev => (prev + 1) % 360);
-      }, 50);
-      return () => clearInterval(interval);
-    }
-  }, [isPlaying]);
-
+const VinylDisc = ({ isPlaying }: VinylDiscProps) => {
   return (
     <div className="relative w-28 h-28 flex-shrink-0">
       {/* Outer ring glow */}
@@ -31,7 +19,6 @@ const VinylDisc = ({ isPlaying }: { isPlaying: boolean }) => {
         className={`absolute inset-1 rounded-full bg-gradient-to-br from-muted to-background border border-border/50 ${
           isPlaying ? "animate-vinyl-spin-slow" : ""
         }`}
-        style={{ transform: `rotate(${rotation}deg)` }}
       >
         {/* Grooves */}
         <div className="absolute inset-3 rounded-full border border-muted-foreground/10" />
