@@ -168,14 +168,31 @@ const AnimatedBackground = () => {
       {musicNotes.map((note, i) => (
         <div
           key={`note-${i}`}
-          className="absolute pointer-events-none select-none animate-float-note"
+          className={`absolute pointer-events-none select-none ${i % 2 === 0 ? 'animate-float-note' : 'animate-float-note-alt'}`}
           style={{
             left: `${5 + i * 10}%`,
             bottom: "-20px",
             fontSize: `${14 + (i % 3) * 6}px`,
-            animationDelay: `${i * 1.6}s`,
+            animationDelay: `${i * 1.2}s`,
             animationDuration: `${8 + (i % 4) * 2}s`,
-            color: i % 2 === 0 ? "hsl(35 85% 55% / 0.2)" : "hsl(200 80% 50% / 0.15)",
+            color: i % 2 === 0 ? "hsl(35 85% 55% / 0.25)" : "hsl(200 80% 50% / 0.2)",
+          }}
+        >
+          {note}
+        </div>
+      ))}
+      {/* Second set of notes for more density */}
+      {musicNotes.map((note, i) => (
+        <div
+          key={`note-extra-${i}`}
+          className={`absolute pointer-events-none select-none ${i % 2 === 0 ? 'animate-float-note-alt' : 'animate-float-note'}`}
+          style={{
+            left: `${10 + i * 10}%`,
+            bottom: "-20px",
+            fontSize: `${12 + (i % 2) * 4}px`,
+            animationDelay: `${i * 1.5 + 4}s`,
+            animationDuration: `${10 + (i % 3) * 3}s`,
+            color: i % 2 === 0 ? "hsl(200 80% 50% / 0.15)" : "hsl(35 85% 55% / 0.2)",
           }}
         >
           {note}
