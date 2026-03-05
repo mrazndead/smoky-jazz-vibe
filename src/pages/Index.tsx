@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import JazzPlayer from "@/components/JazzPlayer";
 import JazzQuote from "@/components/JazzQuote";
-import { Music, ChevronLeft, ChevronRight } from "lucide-react";
+import { Music } from "lucide-react";
 
 const Index = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -17,34 +17,9 @@ const Index = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % totalImages);
-  };
-
-  const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + totalImages) % totalImages);
-  };
-
   return (
     <div className="relative min-h-screen flex flex-col overflow-hidden">
       <AnimatedBackground currentImageIndex={currentImageIndex} />
-
-      {/* Navigation Arrows */}
-      <button
-        onClick={prevImage}
-        className="fixed left-2 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-background/20 backdrop-blur-sm border border-primary/20 text-primary/40 hover:text-primary hover:border-primary/60 transition-all active:scale-95"
-        aria-label="Previous background"
-      >
-        <ChevronLeft className="w-6 h-6" />
-      </button>
-      
-      <button
-        onClick={nextImage}
-        className="fixed right-2 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-background/20 backdrop-blur-sm border border-primary/20 text-primary/40 hover:text-primary hover:border-primary/60 transition-all active:scale-95"
-        aria-label="Next background"
-      >
-        <ChevronRight className="w-6 h-6" />
-      </button>
 
       {/* Content */}
       <div className="relative z-10 flex flex-col min-h-screen px-4 py-8">
@@ -84,6 +59,7 @@ const Index = () => {
                   className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${
                     i === currentImageIndex ? "bg-primary w-4" : "bg-primary/20 hover:bg-primary/40"
                   }`}
+                  aria-label={`Switch to background ${i + 1}`}
                 />
               ))}
             </div>
