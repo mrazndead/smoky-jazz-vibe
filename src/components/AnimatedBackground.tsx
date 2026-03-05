@@ -5,10 +5,10 @@ interface AnimatedBackgroundProps {
 }
 
 const images = [
-  "https://images.unsplash.com/photo-1514525253344-f81f3f77412b?auto=format&fit=crop&q=80&w=1920", // Jazz Club
-  "https://images.unsplash.com/photo-1525994886773-080587e161c3?auto=format&fit=crop&q=80&w=1920", // Saxophone
-  "https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?auto=format&fit=crop&q=80&w=1920", // Piano
-  "https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&q=80&w=1920", // Trumpet
+  "/1.png",
+  "/2.png",
+  "/3.jpg",
+  "/4.png",
 ];
 
 const AnimatedBackground = ({ currentImageIndex }: AnimatedBackgroundProps) => {
