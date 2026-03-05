@@ -3,6 +3,7 @@ import { Play, Pause, SkipForward, SkipBack, Volume2, VolumeX, Radio } from 'luc
 import { jazzStations } from '@/data/jazzStations';
 import VinylDisc from './VinylDisc';
 import MartiniGlass from './MartiniGlass';
+import IceCubes from './IceCubes';
 
 const JazzPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -14,46 +15,6 @@ const JazzPlayer = () => {
   const wakeLockRef = useRef<any>(null);
 
   const station = jazzStations[stationIndex];
-
-  // Screen Wake Lock logic
-  useEffect(() => {
-    const requestWakeLock = async () => {
-      if ('wakeLock' in navigator && isPlaying) {
-        try {
-          wakeLockRef.current = await (navigator as any).wakeLock.request('screen');
-        } catch (err) {
-          console.error(`${err.name}, ${err.message}`);
-        }
-      }
-    };
-
-    const releaseWakeLock = async () => {
-      if (wakeLockRef.current) {
-        await wakeLockRef.current.release();
-        wakeLockRef.current = null;
-      }
-    };
-
-    if (isPlaying) {
-      requestWakeLock();
-    } else {
-      releaseWakeLock();
-    }
-
-    // Re-request wake lock if tab becomes visible again
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === 'visible' && isPlaying) {
-        requestWakeLock();
-      }
-    };
-
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-
-    return () => {
-      releaseWakeLock();
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-    };
-  }, [isPlaying]);
 
   useEffect(() => {
     const audio = new Audio();
@@ -136,14 +97,16 @@ const JazzPlayer = () => {
             {/* Status Text (Below) */}
             <div className="flex items-center gap-1.5">
               <Radio className="w-3 h-3 text-primary" />
-              <span className={`text-xs font-mono ${isPlaying ? "text-primary animate-amber-glow" : "text-muted-foreground"}`}>
-                {isPlaying ? "LIVE" : loading ? "TUNING..." : "OFFLINE"}
+              <span className={`text-2xl font-mono ${isPlaying ? "text-primary animate-amber-glow" : "text-muted-foreground"}`}>
+                LIVE
               </span>
             </div>
           </div>
         </div>
         <div className="shrink-0 self-center">
           <MartiniGlass />
+          {/* Added second drink */}
+          <MartiniGlass className="ml-2" />
         </div>
       </div>
 
