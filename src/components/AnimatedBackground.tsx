@@ -81,9 +81,18 @@ const AnimatedBackground = () => {
             <stop offset="0%" stopColor="hsl(35 80% 55%)" stopOpacity="0.06" />
             <stop offset="100%" stopColor="hsl(35 80% 55%)" stopOpacity="0" />
           </linearGradient>
+          <linearGradient id="beam4" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="hsl(200 80% 50%)" stopOpacity="0.05" />
+            <stop offset="100%" stopColor="hsl(200 80% 50%)" stopOpacity="0" />
+          </linearGradient>
         </defs>
+        {/* Sweeping amber spotlight */}
         <polygon points="120,0 80,500 160,500" fill="url(#beam1)" className="animate-spotlight-sweep" style={{ transformOrigin: "120px 0px" }} />
+        {/* Sweeping blue spotlight */}
         <polygon points="280,0 240,450 320,450" fill="url(#beam2)" className="animate-spotlight-sweep-alt" style={{ transformOrigin: "280px 0px" }} />
+        {/* Third sweeping spotlight (blue) */}
+        <polygon points="40,0 10,420 70,420" fill="url(#beam4)" className="animate-spotlight-sweep" style={{ transformOrigin: "40px 0px", animationDelay: "1s" }} />
+        {/* Center subtle beam */}
         <polygon points="200,0 170,400 230,400" fill="url(#beam3)" className="animate-spotlight-breathe" style={{ transformOrigin: "200px 0px" }} />
       </svg>
 
