@@ -66,6 +66,21 @@ const AnimatedBackground = () => {
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-background/65" />
 
+      {/* ===== CIGAR SMOKE WISPS (Left Side) ===== */}
+      <div className="absolute bottom-0 left-4 w-24 h-64 pointer-events-none">
+        {Array.from({ length: 3 }).map((_, i) => (
+          <div
+            key={`smoke-wisp-${i}`}
+            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-32 bg-gradient-to-t from-transparent via-white/5 to-transparent rounded-full blur-xl animate-smoke-wisp"
+            style={{
+              animationDelay: `${i * 4}s`,
+              left: `${20 + i * 30}%`,
+              opacity: 0.1,
+            }}
+          />
+        ))}
+      </div>
+
       {/* ===== CEILING SPOTLIGHT BEAMS ===== */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 400 800" preserveAspectRatio="none">
         <defs>
