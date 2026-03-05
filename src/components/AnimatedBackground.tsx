@@ -28,6 +28,24 @@ const AnimatedBackground = ({ currentImageIndex }: AnimatedBackgroundProps) => {
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-background/75" />
 
+      {/* ===== BOKEH / LIGHT ORBS (Bottom) ===== */}
+      <div className="absolute bottom-0 left-0 w-full h-1/3 overflow-hidden">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div
+            key={`bokeh-${i}`}
+            className="absolute rounded-full bg-primary/10 blur-3xl animate-breathe-slow"
+            style={{
+              width: `${100 + (i % 3) * 50}px`,
+              height: `${100 + (i % 3) * 50}px`,
+              left: `${(i * 20) % 100}%`,
+              bottom: `${-20 + (i % 2) * 40}px`,
+              animationDelay: `${i * 1.5}s`,
+              opacity: 0.15,
+            }}
+          />
+        ))}
+      </div>
+
       {/* ===== CIGAR SMOKE WISPS (Left Side) ===== */}
       <div className="absolute bottom-0 left-4 w-24 h-64">
         {Array.from({ length: 3 }).map((_, i) => (
