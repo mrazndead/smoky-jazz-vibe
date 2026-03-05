@@ -71,11 +71,11 @@ const AnimatedBackground = () => {
         {Array.from({ length: 3 }).map((_, i) => (
           <div
             key={`smoke-wisp-${i}`}
-            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-32 bg-gradient-to-t from-transparent via-white/5 to-transparent rounded-full blur-xl animate-smoke-wisp"
+            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-32 bg-gradient-to-t from-transparent via-white/15 to-transparent rounded-full blur-xl animate-smoke-wisp"
             style={{
               animationDelay: `${i * 4}s`,
               left: `${20 + i * 30}%`,
-              opacity: 0.1,
+              opacity: 0.4,
             }}
           />
         ))}

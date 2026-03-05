@@ -221,10 +221,10 @@
 /* Cigar smoke wisp animation */
 @keyframes smoke-wisp-rise {
   0% { transform: translateY(0) scaleX(1); opacity: 0; }
-  20% { opacity: 0.15; }
-  50% { transform: translateY(-100px) scaleX(1.5); opacity: 0.1; }
-  80% { opacity: 0.05; }
-  100% { transform: translateY(-250px) scaleX(2); opacity: 0; }
+  20% { opacity: 0.35; }
+  50% { transform: translateY(-150px) scaleX(2); opacity: 0.25; }
+  80% { opacity: 0.1; }
+  100% { transform: translateY(-300px) scaleX(3); opacity: 0; }
 }
 
 .animate-smoke { animation: smoke-drift 12s ease-in-out infinite; will-change: transform, opacity; }
