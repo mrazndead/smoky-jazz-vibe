@@ -1,67 +1,67 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import jazzBarBg from "@/assets/jazz-bar-bg.jpg";
-import jazzBarBg2 from "@/assets/jazz-bar-bg-2.jpg";
-import jazzBarBg3 from "@/assets/jazz-bar-bg-3.jpg";
+// Assuming these images will be added to the assets folder
+const jazzBarBg2 = "/src/assets/jazz-bar-bg-2.jpg";
+const jazzBarBg3 = "/src/assets/jazz-bar-bg-3.jpg";
+const jazzBarBg4 = "/src/assets/jazz-bar-bg-4.jpg";
 
 const musicNotes = ["♪", "♫", "♬", "♩", "♭", "♯", "𝄞", "♪", "♫"];
 
 const AnimatedBackground = () => {
-  const [currentImage, setCurrentImage] = useState(0);
-  const [isSwiping, setIsSwiping] = useState(false);
-  const [swipeStartX, setSwipeStartX] = useState(0);
-  const [swipeEndX, setSwipeEndX] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const touchStartX = useRef<number | null>(null);
+  const images = [jazzBarBg, jazzBarBg2, jazzBarBg3, jazzBarBg4];
 
-  const images = [
-    jazzBarBg,
-    jazzBarBg2,
-    jazzBarBg3,
-  ];
-
+  // Cycle background every 25 minutes
   useEffect(() => {
     const interval = setInterval(() => {
-      const nextIndex = (currentImage + 1) % images.length;
-      setCurrentImage(nextIndex);
-    }, 1500000); // 25 minutes
+      setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    }, 25 * 60 * 1000); // 25 minutes in milliseconds
 
     return () => clearInterval(interval);
-  }, [currentImage]);
+  }, [images.length]);
 
-  const handleTouchStart = (e: TouchEvent) => {
-    const touch = e.touches[0];
-    setSwipeStartX(touch.clientX);
-    setIsSwiping(true);
+  // Manual swipe handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
   };
 
-  const handleTouchMove = (e: TouchEvent) => {
-    if (!isSwiping) return;
-    const touch = e.touches[0];
-    setSwipeEndX(touch.clientX);
-  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX.current - touchEndX;
+    const threshold = 50; // minimum distance for a swipe
 
-  const handleTouchEnd = () => {
-    if (!isSwiping) return;
-    const swipeDistance = swipeEndX - swipeStartX;
-    const shouldSwipeLeft = swipeDistance > 100;
-    const shouldSwipeRight = swipeDistance < -100;
-
-    if (shouldSwipeLeft) {
-      const nextIndex = (currentImage - 1 + images.length) % images.length;
-      setCurrentImage(nextIndex);
-    } else if (shouldSwipeRight) {
-      const nextIndex = (currentImage + 1) % images.length;
-      setCurrentImage(nextIndex);
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0) {
+        // Swipe left -> Next image
+        setCurrentImageIndex((prev) => (prev + 1) % images.length);
+      } else {
+        // Swipe right -> Previous image
+        setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+      }
     }
-
-    setIsSwiping(false);
+    
+    touchStartX.current = null;
   };
 
   return (
-    <div className="fixed inset-0 z-0 overflow-hidden">
-      {/* Base image with gentle flicker */}
-      <div
-        className="absolute inset-0 animate-flicker-subtle bg-cover bg-center"
-        style={{ backgroundImage: `url(${images[currentImage]})` }}
-      />
+    <div 
+      className="fixed inset-0 z-0 overflow-hidden touch-none"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
+      {/* Background Images with Crossfade */}
+      {images.map((img, index) => (
+        <div
+          key={index}
+          className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out ${
+            index === currentImageIndex ? "opacity-100" : "opacity-0"
+          }`}
+          style={{ backgroundImage: `url(${img})` }}
+        />
+      ))}
 
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-background/65" />
@@ -82,15 +82,12 @@ const AnimatedBackground = () => {
             <stop offset="100%" stopColor="hsl(35 80% 55%)" stopOpacity="0" />
           </linearGradient>
         </defs>
-        {/* Sweeping amber spotlight */}
         <polygon points="120,0 80,500 160,500" fill="url(#beam1)" className="animate-spotlight-sweep" style={{ transformOrigin: "120px 0px" }} />
-        {/* Sweeping blue spotlight */}
         <polygon points="280,0 240,450 320,450" fill="url(#beam2)" className="animate-spotlight-sweep-alt" style={{ transformOrigin: "280px 0px" }} />
-        {/* Center subtle beam */}
         <polygon points="200,0 170,400 230,400" fill="url(#beam3)" className="animate-spotlight-breathe" style={{ transformOrigin: "200px 0px" }} />
       </svg>
 
-      {/* ===== CEILING LIGHT FIXTURES (SVG) ===== */}
+      {/* ===== CEILING LIGHT FIXTURES ===== */}
       <svg className="absolute top-0 left-0 w-full h-12 pointer-events-none" viewBox="0 0 400 30" preserveAspectRatio="none">
         {[80, 200, 320].map((x, i) => (
           <g key={`fixture-${i}`}>
@@ -103,13 +100,9 @@ const AnimatedBackground = () => {
 
       {/* ===== CEILING STROBE LIGHTS ===== */}
       <svg className="absolute top-0 left-0 w-full h-8 pointer-events-none" viewBox="0 0 400 20" preserveAspectRatio="none">
-        {/* Strobe light 1 - amber */}
         <rect x="60" y="0" width="8" height="8" fill="hsl(35 100% 60%)" className="animate-strobe" style={{ animationDelay: "0s" }} />
-        {/* Strobe light 2 - blue */}
         <rect x="160" y="0" width="8" height="8" fill="hsl(200 80% 50%)" className="animate-strobe" style={{ animationDelay: "0.3s" }} />
-        {/* Strobe light 3 - amber */}
         <rect x="260" y="0" width="8" height="8" fill="hsl(35 100% 60%)" className="animate-strobe" style={{ animationDelay: "0.6s" }} />
-        {/* Strobe light 4 - blue */}
         <rect x="340" y="0" width="8" height="8" fill="hsl(200 80% 50%)" className="animate-strobe" style={{ animationDelay: "0.9s" }} />
       </svg>
 
@@ -120,29 +113,8 @@ const AnimatedBackground = () => {
           boxShadow: "0 0 30px 12px hsl(45 70% 70% / 0.08)",
         }}
       />
-      {/* Moon blue shine */}
-      <div className="absolute -top-10 -right-10 w-[300px] h-[300px] rounded-full pointer-events-none animate-moon-glow"
-        style={{
-          background: "radial-gradient(circle, hsl(200 80% 60% / 0.08) 0%, hsl(200 80% 50% / 0.03) 40%, transparent 70%)",
-        }}
-      />
 
-      {/* ===== SUBTLE WARM AMBIENT ===== */}
-      <div
-        className="absolute -top-20 -left-20 w-[400px] h-[400px] rounded-full animate-breathe-slow"
-        style={{
-          background: "radial-gradient(circle, hsl(35 100% 60% / 0.06) 0%, transparent 70%)",
-        }}
-      />
-      <div
-        className="absolute -top-10 -right-20 w-[350px] h-[350px] rounded-full animate-breathe-slow"
-        style={{
-          background: "radial-gradient(circle, hsl(200 80% 50% / 0.04) 0%, transparent 70%)",
-          animationDelay: "4s",
-        }}
-      />
-
-      {/* ===== NEON SIGNS (SVG) ===== */}
+      {/* ===== NEON SIGNS ===== */}
       <svg className="absolute top-14 left-4 w-20 h-10 pointer-events-none select-none animate-neon-sign" viewBox="0 0 80 30">
         <text x="5" y="22" fontFamily="Playfair Display, serif" fontWeight="900" fontStyle="italic" fontSize="18"
           fill="none" stroke="hsl(200 80% 50%)" strokeWidth="0.8"
@@ -155,19 +127,7 @@ const AnimatedBackground = () => {
         </defs>
       </svg>
 
-      <svg className="absolute top-24 right-4 w-14 h-8 pointer-events-none select-none animate-neon-sign-alt" viewBox="0 0 56 24">
-        <text x="4" y="17" fontFamily="Playfair Display, serif" fontWeight="700" fontSize="13"
-          fill="hsl(35 100% 60%)" stroke="hsl(35 100% 60%)" strokeWidth="0.3"
-          filter="url(#neonGlowAmber)">LIVE</text>
-        <defs>
-          <filter id="neonGlowAmber" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="3" result="blur" />
-            <feMerge><feMergeNode in="blur" /><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
-          </filter>
-        </defs>
-      </svg>
-
-      {/* ===== CANDLES (SVG) ===== */}
+      {/* ===== CANDLES ===== */}
       <svg className="absolute bottom-0 left-0 w-full h-48 pointer-events-none" viewBox="0 0 400 120" preserveAspectRatio="xMidYMax meet">
         {[
           { x: 30, y: 85, h: 18, delay: 0 },
@@ -181,47 +141,13 @@ const AnimatedBackground = () => {
           { x: 340, y: 93, h: 11, delay: 1.0 },
         ].map((c, i) => (
           <g key={`candle-${i}`}>
-            {/* Candle body */}
             <rect x={c.x - 2} y={c.y} width="4" height={c.h} rx="1" fill="hsl(35 30% 25%)" opacity="0.5" />
-            {/* Wick */}
             <line x1={c.x} y1={c.y} x2={c.x} y2={c.y - 3} stroke="hsl(35 20% 20%)" strokeWidth="0.5" />
-            {/* Flame outer */}
             <ellipse cx={c.x} cy={c.y - 5} rx="2.5" ry="4" fill="hsl(35 100% 60%)" opacity="0.3"
               className="animate-candle-flicker" style={{ animationDelay: `${c.delay}s`, transformOrigin: `${c.x}px ${c.y - 5}px` }} />
-            {/* Flame inner */}
             <ellipse cx={c.x} cy={c.y - 5} rx="1.2" ry="2.5" fill="hsl(45 100% 80%)" opacity="0.6"
               className="animate-candle-flicker" style={{ animationDelay: `${c.delay + 0.2}s`, transformOrigin: `${c.x}px ${c.y - 5}px` }} />
-            {/* Glow */}
             <circle cx={c.x} cy={c.y - 4} r="8" fill="hsl(35 100% 60%)" opacity="0.04"
-              className="animate-candle-glow" style={{ animationDelay: `${c.delay}s` }} />
-          </g>
-        ))}
-      </svg>
-
-      {/* ===== RIGHT SIDE TABLE CANDLES ===== */}
-      <svg className="absolute bottom-20 right-0 w-32 h-40 pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="xMaxYMax meet">
-        {/* Table surface hint */}
-        <ellipse cx="50" cy="85" rx="45" ry="6" fill="hsl(25 20% 12%)" opacity="0.4" />
-        {[
-          { x: 30, y: 55, h: 22, delay: 0.2 },
-          { x: 55, y: 60, h: 16, delay: 0.9 },
-          { x: 75, y: 52, h: 24, delay: 1.5 },
-        ].map((c, i) => (
-          <g key={`right-candle-${i}`}>
-            {/* Candle holder */}
-            <rect x={c.x - 4} y={c.y + c.h - 2} width="8" height="3" rx="1" fill="hsl(35 20% 18%)" opacity="0.6" />
-            {/* Candle body */}
-            <rect x={c.x - 2.5} y={c.y} width="5" height={c.h} rx="1.5" fill="hsl(40 25% 30%)" opacity="0.5" />
-            {/* Wick */}
-            <line x1={c.x} y1={c.y} x2={c.x} y2={c.y - 3} stroke="hsl(35 20% 20%)" strokeWidth="0.6" />
-            {/* Flame outer */}
-            <ellipse cx={c.x} cy={c.y - 6} rx="3" ry="5" fill="hsl(35 100% 60%)" opacity="0.35"
-              className="animate-candle-flicker" style={{ animationDelay: `${c.delay}s`, transformOrigin: `${c.x}px ${c.y - 6}px` }} />
-            {/* Flame inner */}
-            <ellipse cx={c.x} cy={c.y - 6} rx="1.5" ry="3" fill="hsl(45 100% 80%)" opacity="0.65"
-              className="animate-candle-flicker" style={{ animationDelay: `${c.delay + 0.3}s`, transformOrigin: `${c.x}px ${c.y - 6}px` }} />
-            {/* Glow */}
-            <circle cx={c.x} cy={c.y - 5} r="12" fill="hsl(35 100% 60%)" opacity="0.05"
               className="animate-candle-glow" style={{ animationDelay: `${c.delay}s` }} />
           </g>
         ))}
@@ -245,7 +171,7 @@ const AnimatedBackground = () => {
         </div>
       ))}
 
-      {/* ===== DUST / PARTICLES (SVG) ===== */}
+      {/* ===== DUST / PARTICLES ===== */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 400 800" preserveAspectRatio="none">
         {Array.from({ length: 20 }).map((_, i) => (
           <circle
@@ -260,15 +186,6 @@ const AnimatedBackground = () => {
           />
         ))}
       </svg>
-
-      {/* ===== LIGHT SWEEP ===== */}
-      <div
-        className="absolute inset-0 animate-light-sweep opacity-20 pointer-events-none"
-        style={{
-          background: "linear-gradient(90deg, transparent 40%, hsl(35 100% 60% / 0.04) 50%, transparent 60%)",
-          backgroundSize: "200% 100%",
-        }}
-      />
 
       {/* ===== VIGNETTE ===== */}
       <div
