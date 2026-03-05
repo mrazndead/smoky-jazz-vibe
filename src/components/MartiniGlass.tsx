@@ -1,55 +1,60 @@
-import { useState, useEffect, useRef } from 'react';
-import { Play, Pause, SkipForward, SkipBack, Volume2, VolumeX, Radio } from 'lucide-react';
-import { jazzStations } from '@/data/jazzStations';
-import AnimatedBackground from './AnimatedBackground';
-
-const MartiniGlass = ({ isPlaying }: { isPlaying: boolean }) => {
-  const [rotation, setRotation] = useState(0);
-  const [glowOffset, setGlowOffset] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setRotation(prev => (prev + 1) % 360);
-      setGlowOffset(prev => (prev + 0.1) % 1);
-    }, 50);
-    return () => clearInterval(interval);
-  }, []);
-
+const MartiniGlass = () => {
   return (
-    <div className="relative w-20 h-24 flex-shrink-0">
-      {/* First Martini Glass */}
-      <div className="absolute inset-0 rounded-full border border-primary/30 animate-amber-glow" />
-      {/* Second Martini Glass */}
-      <div className="absolute inset-0 rounded-full border border-primary/30 animate-amber-glow" style={{ left: '25px' }} />
-      {/* Glow effect for both glasses */}
-      <div className="absolute inset-0 rounded-full border border-primary/30 animate-amber-glow" style={{ left: '12.5px' }} />
-      {/* Speaker pulse ring */}
-      {isPlaying && (
-        <>
-          <div className="absolute -inset-2 rounded-full border border-primary/10 animate-speaker-pulse" />
-          <div className="absolute -inset-4 rounded-full border border-neon-blue/5 animate-speaker-pulse" style={{ animationDelay: "0.5s" }} />
-        </>
-      )}
-      {/* Vinyl body */}
-      <div
-        className={`absolute inset-1 rounded-full bg-gradient-to-br from-muted to-background border border-border/50 ${ isPlaying ? "animate-vinyl-spin-slow" : "" }`}
-        style={{ transform: `rotate(${rotation}deg)` }}
-      >
-        {/* Grooves */}
-        <div className="absolute inset-3 rounded-full border border-muted-foreground/10" />
-        <div className="absolute inset-5 rounded-full border border-muted-foreground/10" />
-        <div className="absolute inset-7 rounded-full border border-muted-foreground/10" />
-        {/* Light reflection shimmer */}
-        <div className="absolute inset-1 rounded-full animate-vinyl-shimmer overflow-hidden pointer-events-none"
-          style={{
-            background: "linear-gradient(135deg, transparent 30%, hsl(35 100% 80% / 0.08) 45%, transparent 55%)",
-          }}
+    <div className="w-20 h-24 opacity-50 hover:opacity-70 transition-opacity duration-700">
+      <svg viewBox="0 0 80 100" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="glassGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="hsl(200 20% 75%)" stopOpacity="0.45" />
+            <stop offset="100%" stopColor="hsl(200 20% 75%)" stopOpacity="0.15" />
+          </linearGradient>
+          <filter id="martiniGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="1.5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
+        {/* Glass bowl - V shape */}
+        <polygon
+          points="15,20 65,20 40,58"
+          fill="url(#glassGrad)"
+          stroke="hsl(200 20% 75% / 0.5)"
+          strokeWidth="1"
+          filter="url(#martiniGlow)"
         />
-        {/* Label */}
-        <div className="absolute inset-8 rounded-full bg-gradient-to-br from-primary/80 to-primary flex items-center justify-center">
-          <div className={`w-2 h-2 rounded-full bg-primary-foreground/80 ${isPlaying ? "animate-pulse" : ""}`} />
-        </div>
-      </div>
+
+        {/* Liquid surface */}
+        <line x1="22" y1="30" x2="58" y2="30" stroke="hsl(35 60% 60% / 0.35)" strokeWidth="0.7" />
+
+        {/* Stem */}
+        <line x1="40" y1="58" x2="40" y2="82" stroke="hsl(200 20% 75% / 0.45)" strokeWidth="1.4" />
+
+        {/* Base */}
+        <ellipse cx="40" cy="83" rx="12" ry="2.5" fill="none" stroke="hsl(200 20% 75% / 0.45)" strokeWidth="1" />
+
+        {/* Toothpick - Adjusted to stay inside the bowl */}
+        <line
+          x1="30" y1="10" x2="50" y2="40"
+          stroke="hsl(35 40% 50% / 0.7)"
+          strokeWidth="1.5"
+          className="animate-toothpick-sway"
+          style={{ transformOrigin: "40px 25px" }}
+        />
+
+        {/* Olive - Made significantly larger */}
+        <g className="animate-olive-bob" style={{ transformOrigin: "42px 32px" }}>
+          <ellipse cx="42" cy="32" rx="6" ry="5" fill="hsl(90 50% 40%)" />
+          <ellipse cx="42" cy="32" rx="2" ry="1.5" fill="hsl(35 50% 30%)" />
+        </g>
+
+        {/* Rim highlight */}
+        <line x1="17" y1="20" x2="63" y2="20" stroke="hsl(200 30% 80% / 0.25)" strokeWidth="0.5" />
+
+        {/* Subtle glass reflection */}
+        <line x1="24" y1="24" x2="34" y2="44" stroke="hsl(200 30% 80% / 0.1)" strokeWidth="1.5" strokeLinecap="round" />
+      </svg>
     </div>
   );
 };
