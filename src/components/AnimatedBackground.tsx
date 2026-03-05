@@ -5,10 +5,10 @@ interface AnimatedBackgroundProps {
 }
 
 const images = [
-  "/1.png",
-  "/2.png",
-  "/3.jpg",
-  "/4.png",
+  "dyad-media://media/smoky-jazz-vibe/.dyad/media/172ea867b960da56b830da9250d65cfe.png",
+  "dyad-media://media/smoky-jazz-vibe/.dyad/media/0685e1bd5524a21a5186eaf38d3c6b70.png",
+  "dyad-media://media/smoky-jazz-vibe/.dyad/media/f137e61a6236df0975416ffff10cadf6.jpg",
+  "dyad-media://media/smoky-jazz-vibe/.dyad/media/00c5e3d230495a2dffced8c6ebd05673.png",
 ];
 
 const AnimatedBackground = ({ currentImageIndex }: AnimatedBackgroundProps) => {
