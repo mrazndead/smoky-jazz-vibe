@@ -11,8 +11,49 @@ const JazzPlayer = () => {
   const [isMuted, setIsMuted] = useState(false);
   const [loading, setLoading] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const wakeLockRef = useRef<any>(null);
 
   const station = jazzStations[stationIndex];
+
+  // Screen Wake Lock logic
+  useEffect(() => {
+    const requestWakeLock = async () => {
+      if ('wakeLock' in navigator && isPlaying) {
+        try {
+          wakeLockRef.current = await (navigator as any).wakeLock.request('screen');
+        } catch (err) {
+          console.error(`${err.name}, ${err.message}`);
+        }
+      }
+    };
+
+    const releaseWakeLock = async () => {
+      if (wakeLockRef.current) {
+        await wakeLockRef.current.release();
+        wakeLockRef.current = null;
+      }
+    };
+
+    if (isPlaying) {
+      requestWakeLock();
+    } else {
+      releaseWakeLock();
+    }
+
+    // Re-request wake lock if tab becomes visible again
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible' && isPlaying) {
+        requestWakeLock();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      releaseWakeLock();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, [isPlaying]);
 
   useEffect(() => {
     const audio = new Audio();
