@@ -40,7 +40,6 @@ const JazzPlayer = () => {
       releaseWakeLock();
     }
 
-    // Re-request wake lock if tab becomes visible again
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible' && isPlaying) {
         requestWakeLock();
@@ -120,9 +119,7 @@ const JazzPlayer = () => {
       <div className="flex items-center gap-4 mb-5">
         <VinylDisc isPlaying={isPlaying && !loading} />
         <div className="flex-1 min-w-0">
-          {/* Status Indicator Area */}
           <div className="flex flex-col gap-1.5 mb-1">
-            {/* Visualizer Bars (Above) */}
             {isPlaying && (
               <div className="flex items-center gap-0.5 h-4">
                 <div className="w-1 h-2 bg-primary rounded-full animate-eq-bar" style={{ animationDelay: "0s" }} />
@@ -133,17 +130,19 @@ const JazzPlayer = () => {
               </div>
             )}
             
-            {/* Status Text (Below) */}
             <div className="flex items-center gap-1.5">
               <Radio className="w-3 h-3 text-primary" />
               <span className={`text-xs font-mono ${isPlaying ? "text-primary animate-amber-glow" : "text-muted-foreground"}`}>
                 {isPlaying ? "LIVE" : loading ? "TUNING..." : "OFFLINE"}
               </span>
             </div>
+            <div className="text-[10px] font-mono tracking-wider uppercase text-primary/70 truncate">
+              {station.genre}
+            </div>
           </div>
         </div>
         <div className="shrink-0 self-center">
-          <MartiniGlass />
+          <MartiniGlass isPlaying={isPlaying && !loading} />
         </div>
       </div>
 
@@ -201,12 +200,12 @@ const JazzPlayer = () => {
         />
       </div>
 
-      {/* Station list */}
+      {/* Station list - Grid layout for 3 rows of 3 */}
       <div className="mt-4 pt-4 border-t border-border/30">
-        <p className="text-[10px] font-mono tracking-[0.3em] uppercase text-muted-foreground mb-2 text-center">
+        <p className="text-[10px] font-mono tracking-[0.3em] uppercase text-muted-foreground mb-3 text-center">
           ♪ Stations ♪
         </p>
-        <div className="flex flex-wrap gap-1.5 justify-center">
+        <div className="grid grid-cols-3 gap-2">
           {jazzStations.map((s, i) => (
             <button
               key={s.name}
@@ -221,11 +220,12 @@ const JazzPlayer = () => {
                   });
                 }
               }}
-              className={`text-[10px] font-mono px-2.5 py-1 rounded-full border transition-all ${
+              className={`text-[9px] font-mono px-1 py-1.5 rounded-md border transition-all truncate ${
                 i === stationIndex
                   ? "border-primary bg-primary/15 text-primary"
                   : "border-border/40 text-muted-foreground hover:border-primary/40 hover:text-foreground"
               }`}
+              title={s.name}
             >
               {s.name}
             </button>

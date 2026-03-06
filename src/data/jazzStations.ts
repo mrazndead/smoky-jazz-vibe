@@ -35,4 +35,19 @@ export const jazzStations: JazzStation[] = [
     url: "https://ice9.securenetsystems.net/JAZZ9352",
     genre: "Colorado Jazz",
   },
+  {
+    name: "Jazz24 Seattle",
+    url: "https://live.kexp.org/kexp/jazz24_128.mp3",
+    genre: "Classic Jazz",
+  },
+  {
+    name: "TSF Jazz Paris",
+    url: "http://tsfjazz.ice.infomaniak.ch/tsfjazz-high.mp3",
+    genre: "French Jazz",
+  },
+  {
+    name: "Bossa Nova",
+    url: "https://streaming.radionomy.com/BossaNovaRadio",
+    genre: "Bossa Nova",
+  },
 ];
