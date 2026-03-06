@@ -136,8 +136,8 @@ const JazzPlayer = () => {
                 {isPlaying ? "LIVE" : loading ? "TUNING..." : "OFFLINE"}
               </span>
             </div>
-            <div className="text-[10px] font-mono tracking-wider uppercase text-primary/70 truncate">
-              {station.genre}
+            <div className="text-[10px] font-mono tracking-wider uppercase text-primary/70 whitespace-normal leading-tight">
+              {station.name}
             </div>
           </div>
         </div>
