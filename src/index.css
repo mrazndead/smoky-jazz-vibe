@@ -227,6 +227,17 @@
   100% { transform: translateY(-300px) scaleX(3); opacity: 0; }
 }
 
+/* Martini Glass Animations */
+@keyframes olive-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(2px); }
+}
+
+@keyframes toothpick-sway {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(2deg); }
+}
+
 .animate-smoke { animation: smoke-drift 12s ease-in-out infinite; will-change: transform, opacity; }
 .animate-smoke-slow { animation: smoke-drift 18s ease-in-out infinite reverse; will-change: transform, opacity; }
 .animate-flicker { animation: flicker 4s ease-in-out infinite; }
@@ -261,6 +272,8 @@
 .animate-fixture-glow-2 { animation: candle-flicker 2s ease-in-out infinite; animation-delay: 1.4s; }
 .animate-smoke-slower { animation: smoke-drift 24s ease-in-out infinite; animation-direction: alternate; }
 .animate-smoke-wisp { animation: smoke-wisp-rise 12s ease-in-out infinite; }
+.animate-olive-bob { animation: olive-bob 3s ease-in-out infinite; }
+.animate-toothpick-sway { animation: toothpick-sway 4s ease-in-out infinite; }
 
 /* Glassmorphism card */
 .glass-card {
