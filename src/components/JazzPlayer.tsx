@@ -200,12 +200,12 @@ const JazzPlayer = () => {
         />
       </div>
 
-      {/* Station list - Grid layout for 3 rows of 3 */}
+      {/* Station list - Centered flex layout */}
       <div className="mt-4 pt-4 border-t border-border/30">
         <p className="text-[10px] font-mono tracking-[0.3em] uppercase text-muted-foreground mb-3 text-center">
           ♪ Stations ♪
         </p>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="flex flex-wrap justify-center gap-2">
           {jazzStations.map((s, i) => (
             <button
               key={s.name}
@@ -220,7 +220,7 @@ const JazzPlayer = () => {
                   });
                 }
               }}
-              className={`text-[9px] font-mono px-1 py-1.5 rounded-md border transition-all truncate ${
+              className={`text-[9px] font-mono px-1 py-1.5 rounded-md border transition-all truncate w-[30%] ${
                 i === stationIndex
                   ? "border-primary bg-primary/15 text-primary"
                   : "border-border/40 text-muted-foreground hover:border-primary/40 hover:text-foreground"
