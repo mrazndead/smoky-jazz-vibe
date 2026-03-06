@@ -46,8 +46,8 @@ export const jazzStations: JazzStation[] = [
     genre: "French Jazz",
   },
   {
-    name: "Smooth Lounge",
-    url: "https://cdm1.hosterstats.com:8000/stream",
-    genre: "Lounge Jazz",
+    name: "KCSM Jazz 91.1",
+    url: "https://kcsm.streamguys1.com/live",
+    genre: "Bay Area Jazz",
   },
 ];
