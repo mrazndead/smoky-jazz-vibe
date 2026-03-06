@@ -46,8 +46,8 @@ export const jazzStations: JazzStation[] = [
     genre: "French Jazz",
   },
   {
-    name: "ABC Jazz AU",
-    url: "https://live-radio01.mediahubaustralia.com/2JNW/mp3/",
-    genre: "Global Jazz",
+    name: "KJazz 88.1 LA",
+    url: "https://kjzz.streamguys1.com/kjzz-hi",
+    genre: "West Coast Jazz",
   },
 ];
