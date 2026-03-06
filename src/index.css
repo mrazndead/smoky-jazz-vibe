@@ -242,7 +242,7 @@
 /* Martini Glass Animations */
 @keyframes olive-bob {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(2px); }
+  50% { transform: translateY(4px); }
 }
 
 @keyframes toothpick-sway {
