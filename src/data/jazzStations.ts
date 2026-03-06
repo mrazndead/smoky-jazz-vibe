@@ -46,8 +46,8 @@ export const jazzStations: JazzStation[] = [
     genre: "French Jazz",
   },
   {
-    name: "WBGO Newark",
-    url: "https://wbgo.streamguys1.com/wbgo128",
-    genre: "NYC Jazz",
+    name: "ABC Jazz AU",
+    url: "https://live-radio01.mediahubaustralia.com/2JNW/mp3/",
+    genre: "Global Jazz",
   },
 ];
