@@ -180,8 +180,20 @@
 }
 
 @keyframes neon-sign {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.95; }
+  0%, 100% { 
+    opacity: 1; 
+    filter: drop-shadow(0 0 2px hsl(200 80% 50% / 0.8)) drop-shadow(0 0 8px hsl(200 80% 50% / 0.4));
+  }
+  45% { opacity: 1; }
+  46% { opacity: 0.8; }
+  47% { opacity: 1; }
+  50% { 
+    opacity: 0.9; 
+    filter: drop-shadow(0 0 1px hsl(200 80% 50% / 0.6)) drop-shadow(0 0 4px hsl(200 80% 50% / 0.2));
+  }
+  53% { opacity: 1; }
+  54% { opacity: 0.7; }
+  55% { opacity: 1; }
 }
 
 @keyframes strobe-blue {
@@ -259,7 +271,7 @@
 .animate-candle-flicker { animation: candle-flicker 2.5s ease-in-out infinite; will-change: transform, opacity; }
 .animate-candle-glow { animation: candle-glow 2s ease-in-out infinite; }
 .animate-moon-glow { animation: moon-glow 8s ease-in-out infinite; }
-.animate-neon-sign { animation: neon-sign 5s ease-in-out infinite; }
+.animate-neon-sign { animation: neon-sign 4s ease-in-out infinite; }
 .animate-neon-sign-alt { animation: neon-sign 5s ease-in-out infinite; animation-delay: 2.5s; }
 .animate-speaker-pulse { animation: speaker-pulse 1.5s ease-out infinite; }
 .animate-eq-bar { animation: eq-bar 0.6s ease-in-out infinite; }
