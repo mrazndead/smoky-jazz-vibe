@@ -8,14 +8,12 @@ const Index = () => {
     <div className="relative min-h-screen flex flex-col">
       <AnimatedBackground />
 
-      {/* LIVE Neon Sign - Top Right */}
+      {/* LIVE Indicator - Top Right */}
       <div className="absolute top-8 right-8 z-20 pointer-events-none select-none">
-        <div className="flex items-center gap-2.5 px-4 py-1.5 rounded-sm border border-orange-900/30 bg-black/20 backdrop-blur-sm animate-flicker-subtle">
-          <div className="w-2 h-2 rounded-full bg-orange-500 animate-pulse shadow-[0_0_8px_#f97316]" />
-          <span className="font-mono text-[11px] font-black tracking-[0.3em] text-orange-500 uppercase italic"
+        <div className="flex items-center animate-flicker-subtle opacity-40">
+          <span className="font-mono text-[10px] font-bold tracking-[0.4em] text-orange-500/80 uppercase italic"
             style={{ 
-              textShadow: "0 0-8px rgba(249, 115, 22, 0.8), 0 0 20px rgba(249, 115, 22, 0.4)",
-              filter: "drop-shadow(0 0 2px rgba(249, 115, 22, 0.5))"
+              textShadow: "0 0 4px rgba(249, 115, 22, 0.4)",
             }}>
             Live
           </span>
