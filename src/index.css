@@ -87,6 +87,17 @@
   }
 }
 
+@keyframes neon-orange-pulse {
+  0%, 100% { 
+    text-shadow: 0 0 7px hsl(35 100% 60% / 0.6), 0 0 20px hsl(35 100% 60% / 0.3), 0 0 40px hsl(35 100% 60% / 0.15);
+    opacity: 0.6;
+  }
+  50% { 
+    text-shadow: 0 0 4px hsl(35 100% 60% / 0.4), 0 0 12px hsl(35 100% 60% / 0.2), 0 0 25px hsl(35 100% 60% / 0.1);
+    opacity: 0.4;
+  }
+}
+
 @keyframes amber-glow {
   0%, 100% { 
     text-shadow: 0 0 10px hsl(35 100% 60% / 0.7), 0 0 30px hsl(35 100% 60% / 0.4), 0 0 60px hsl(35 100% 60% / 0.2);
@@ -255,6 +266,7 @@
 .animate-flicker { animation: flicker 4s ease-in-out infinite; }
 .animate-flicker-subtle { animation: flicker-subtle 16s ease-in-out infinite; will-change: opacity; }
 .animate-neon-pulse { animation: neon-pulse 3s ease-in-out infinite; }
+.animate-neon-orange-pulse { animation: neon-orange-pulse 3s ease-in-out infinite; }
 .animate-amber-glow { animation: amber-glow 4s ease-in-out infinite; }
 .animate-light-sweep { animation: light-sweep 8s linear infinite; }
 .animate-strobe { animation: strobe-subtle 10s linear infinite; }
