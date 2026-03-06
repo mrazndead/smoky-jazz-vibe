@@ -46,8 +46,8 @@ export const jazzStations: JazzStation[] = [
     genre: "French Jazz",
   },
   {
-    name: "Linn Jazz UK",
-    url: "http://stream.linn.co.uk:8000/linnjazz",
-    genre: "Modern Jazz",
+    name: "Smooth Lounge",
+    url: "https://cdm1.hosterstats.com:8000/stream",
+    genre: "Lounge Jazz",
   },
 ];
