@@ -36,8 +36,8 @@ export const jazzStations: JazzStation[] = [
     genre: "Colorado Jazz",
   },
   {
-    name: "Jazz24 Seattle",
-    url: "https://live.kexp.org/kexp/jazz24_128.mp3",
+    name: "Jazz Radio",
+    url: "http://jazzradio.ice.infomaniak.ch/jazzradio-high.mp3",
     genre: "Classic Jazz",
   },
   {
@@ -46,8 +46,8 @@ export const jazzStations: JazzStation[] = [
     genre: "French Jazz",
   },
   {
-    name: "Bossa Nova",
-    url: "https://streaming.radionomy.com/BossaNovaRadio",
-    genre: "Bossa Nova",
+    name: "Linn Jazz UK",
+    url: "http://stream.linn.co.uk:8000/linnjazz",
+    genre: "Modern Jazz",
   },
 ];
