@@ -46,8 +46,8 @@ export const jazzStations: JazzStation[] = [
     genre: "French Jazz",
   },
   {
-    name: "KCSM Jazz 91.1",
-    url: "https://kcsm.streamguys1.com/live",
-    genre: "Bay Area Jazz",
+    name: "WBGO Newark",
+    url: "https://wbgo.streamguys1.com/wbgo128",
+    genre: "NYC Jazz",
   },
 ];
