@@ -10,10 +10,10 @@ const Index = () => {
 
       {/* LIVE Indicator - Top Right */}
       <div className="absolute top-8 right-8 z-20 pointer-events-none select-none">
-        <div className="flex items-center animate-flicker-subtle opacity-40">
-          <span className="font-mono text-[10px] font-bold tracking-[0.4em] text-orange-500/80 uppercase italic"
+        <div className="flex items-center animate-flicker-subtle opacity-30">
+          <span className="font-display text-[14px] font-black tracking-[0.2em] text-orange-500/70 uppercase italic"
             style={{ 
-              textShadow: "0 0 4px rgba(249, 115, 22, 0.4)",
+              textShadow: "0 0 4px rgba(249, 115, 22, 0.3)",
             }}>
             Live
           </span>
