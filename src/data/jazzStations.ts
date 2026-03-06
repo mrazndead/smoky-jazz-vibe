@@ -45,9 +45,4 @@ export const jazzStations: JazzStation[] = [
     url: "http://tsfjazz.ice.infomaniak.ch/tsfjazz-high.mp3",
     genre: "French Jazz",
   },
-  {
-    name: "KJazz 88.1 LA",
-    url: "https://kjzz.streamguys1.com/kjzz-hi",
-    genre: "West Coast Jazz",
-  },
 ];
