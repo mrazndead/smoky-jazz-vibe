@@ -10,12 +10,12 @@ const Index = () => {
 
       {/* LIVE Neon Sign - Top Right */}
       <div className="absolute top-8 right-8 z-20 pointer-events-none select-none">
-        <div className="flex items-center gap-2.5 px-4 py-1.5 rounded-sm border border-red-900/30 bg-black/20 backdrop-blur-sm animate-flicker-subtle">
-          <div className="w-2 h-2 rounded-full bg-red-600 animate-pulse shadow-[0_0_8px_#dc2626]" />
-          <span className="font-mono text-[11px] font-black tracking-[0.3em] text-red-600 uppercase italic"
+        <div className="flex items-center gap-2.5 px-4 py-1.5 rounded-sm border border-orange-900/30 bg-black/20 backdrop-blur-sm animate-flicker-subtle">
+          <div className="w-2 h-2 rounded-full bg-orange-500 animate-pulse shadow-[0_0_8px_#f97316]" />
+          <span className="font-mono text-[11px] font-black tracking-[0.3em] text-orange-500 uppercase italic"
             style={{ 
-              textShadow: "0 0 8px rgba(220, 38, 38, 0.8), 0 0 20px rgba(220, 38, 38, 0.4)",
-              filter: "drop-shadow(0 0 2px rgba(220, 38, 38, 0.5))"
+              textShadow: "0 0-8px rgba(249, 115, 22, 0.8), 0 0 20px rgba(249, 115, 22, 0.4)",
+              filter: "drop-shadow(0 0 2px rgba(249, 115, 22, 0.5))"
             }}>
             Live
           </span>
