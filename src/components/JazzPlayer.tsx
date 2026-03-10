@@ -114,14 +114,14 @@ const JazzPlayer = () => {
   };
 
   return (
-    <div className="glass-card rounded-xl p-5 w-full max-w-sm mx-auto">
+    <div className="glass-card rounded-xl p-4 w-full max-w-sm mx-auto">
       {/* Station info with vinyl */}
-      <div className="flex items-center gap-4 mb-5">
+      <div className="flex items-center gap-4 mb-4">
         <VinylDisc isPlaying={isPlaying && !loading} />
         <div className="flex-1 min-w-0">
-          <div className="flex flex-col gap-1.5 mb-1">
+          <div className="flex flex-col gap-1 mb-1">
             {isPlaying && (
-              <div className="flex items-center gap-0.5 h-4">
+              <div className="flex items-center gap-0.5 h-3">
                 <div className="w-1 h-2 bg-primary rounded-full animate-eq-bar" style={{ animationDelay: "0s" }} />
                 <div className="w-1 h-3 bg-primary rounded-full animate-eq-bar" style={{ animationDelay: "0.1s" }} />
                 <div className="w-1 h-1.5 bg-primary rounded-full animate-eq-bar" style={{ animationDelay: "0.2s" }} />
@@ -147,7 +147,7 @@ const JazzPlayer = () => {
       </div>
 
       {/* Controls */}
-      <div className="flex items-center justify-center gap-6 mb-4">
+      <div className="flex items-center justify-center gap-6 mb-3">
         <button
           onClick={() => changeStation(-1)}
           className="text-muted-foreground hover:text-foreground transition-colors"
@@ -201,8 +201,8 @@ const JazzPlayer = () => {
       </div>
 
       {/* Station list - Centered flex layout */}
-      <div className="mt-4 pt-4 border-t border-border/30">
-        <p className="text-[10px] font-mono tracking-[0.3em] uppercase text-muted-foreground mb-3 text-center">
+      <div className="mt-3 pt-3 border-t border-border/30">
+        <p className="text-[10px] font-mono tracking-[0.3em] uppercase text-muted-foreground mb-2 text-center">
           ♪ Stations ♪
         </p>
         <div className="flex flex-wrap justify-center gap-2">
