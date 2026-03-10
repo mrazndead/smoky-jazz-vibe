@@ -48,6 +48,16 @@ const Index = () => {
 
         {/* Footer */}
         <footer className="text-center mt-8 pb-4">
+          <div className="mb-4">
+            <a 
+              href="https://blue-note-story.lovable.app/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="font-display italic text-sm text-primary/70 hover:text-primary transition-colors tracking-widest uppercase"
+            >
+              The Story
+            </a>
+          </div>
           <div className="flex items-center justify-center gap-2 text-muted-foreground">
             <Music className="w-3 h-3" />
             <span className="font-mono text-[9px] tracking-[0.3em] uppercase">
