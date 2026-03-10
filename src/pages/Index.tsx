@@ -41,31 +41,31 @@ const Index = () => {
           <JazzQuote />
         </div>
 
-        {/* Player */}
-        <div className="flex-1 flex items-start justify-center">
+        {/* Player Container */}
+        <div className="flex flex-col items-center justify-start">
           <JazzPlayer />
+          
+          {/* Footer - Moved inside the player flow for tighter spacing */}
+          <footer className="text-center mt-4 pb-4">
+            <div className="mb-1">
+              <a 
+                href="https://blue-note-story.lovable.app/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="font-display italic text-sm text-primary/70 hover:text-primary transition-colors tracking-widest uppercase"
+              >
+                The Story
+              </a>
+            </div>
+            <div className="flex items-center justify-center gap-2 text-muted-foreground">
+              <Music className="w-3 h-3" />
+              <span className="font-mono text-[9px] tracking-[0.3em] uppercase">
+                Streaming Live Jazz 24/7
+              </span>
+              <Music className="w-3 h-3" />
+            </div>
+          </footer>
         </div>
-
-        {/* Footer */}
-        <footer className="text-center mt-8 pb-4">
-          <div className="mb-4">
-            <a 
-              href="https://blue-note-story.lovable.app/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="font-display italic text-sm text-primary/70 hover:text-primary transition-colors tracking-widest uppercase"
-            >
-              The Story
-            </a>
-          </div>
-          <div className="flex items-center justify-center gap-2 text-muted-foreground">
-            <Music className="w-3 h-3" />
-            <span className="font-mono text-[9px] tracking-[0.3em] uppercase">
-              Streaming Live Jazz 24/7
-            </span>
-            <Music className="w-3 h-3" />
-          </div>
-        </footer>
       </div>
     </div>
   );
